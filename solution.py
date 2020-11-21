@@ -1,40 +1,50 @@
-with open('input.txt', encoding='utf-8') as f:
-    lst = []
-    N = int(f.readline())
-    for line in f:
-        man = line.strip().split()
-        # print(man)
-        man = list(map(int, man[-3:]))
-        if man[0] >= 40 and man[1] >= 40 and man[2] >= 40:
-            sm = sum(man)
-            man.append(sm)
-            lst.append(tuple(man))
-            # print(lst)
+from sys import stdin
 
-lst.sort(key=lambda p: -p[3])
-# print(*lst, sep='\n')
 
-score = 0
-cnt = 1
-passing_score_tenderer = lst[0][3]
-passing_score = None
+class Matrix:
 
-if len(lst) <= N:
-    output = 0
-else:
-    for i in range(1, len(lst)):
-        if lst[i][3] == lst[i - 1][3]:
-            cnt += 1
-        else:
-            score += cnt
-            if score > N:
-                output = passing_score
-                break
-            cnt = 1
-            passing_score = passing_score_tenderer
-            passing_score_tenderer = lst[i][3]
-    else:
-        output = 1
+    def __init__(self, lst=[]):
+        copy_outer_list = []
+        for i in range(len(lst)):
+            copy_inner_list = []
+            for j in range(len(lst[0])):
+                copy_inner_list.append(lst[i][j])
+            copy_outer_list.append(copy_inner_list)
+        self.lst = copy_outer_list
+        # print(lst)
 
-with open('output.txt', 'w', encoding='utf-8') as f:
-    f.write(str(output))
+    def __str__(self):
+        s = ''
+        for i in range(len(self.lst)):
+            s = ''.join([s, str(self.lst[i][0])])
+            for j in range(1, len(self.lst[0])):
+                s = '\t'.join([s, str(self.lst[i][j])])
+                # print(i, j, s)
+            if i != len(self.lst) - 1:
+                s = ''.join([s, '\n'])
+        return s
+
+    def size(self):
+        return len(self.lst), len(self.lst[0])
+
+
+exec(stdin.read())
+
+# m = Matrix([[1, 0], [0, 1]])
+# print(m)
+# m = Matrix([[2, 0, 0], [0, 1, 10000]])
+# print(m)
+# m = Matrix([[-10, 20, 50, 2443], [-5235, 12, 4324, 4234]])
+# print(m)
+#
+# m1 = Matrix([[1, 0, 0], [1, 1, 1], [0, 0, 0]])
+# m2 = Matrix([[1, 0, 0], [1, 1, 1], [0, 0, 0]])
+# print(str(m1) == str(m2))
+#
+# m = Matrix([[1, 1, 1], [0, 100, 10]])
+# print(str(m) == '1\t1\t1\n0\t100\t10')
+# print(m.size())
+
+# m = Matrix([[1, 2]])
+# print(str(m) == '1\t1\t1')
+# print(m.size())
