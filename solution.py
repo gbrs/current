@@ -1,6 +1,12 @@
 from sys import stdin
 
 
+class MatrixError(BaseException):
+    def __init__(self, Matrix, other):
+        self.matrix1 = Matrix
+        self.matrix2 = other
+
+
 class Matrix:
 
     @staticmethod
@@ -34,6 +40,15 @@ class Matrix:
                 s = ''.join([s, '\n'])
         return s
 
+    def __add__(self, other):
+        if self.size() == other.size():
+            arr = []
+            for row in range(len(self.lst)):
+                arr.append([*map(sum, zip(self.lst[row], other.lst[row]))])
+            return Matrix(arr)
+        else:
+            raise MatrixError(self, other)
+
     def size(self):
         return len(self.lst), len(self.lst[0])
 
@@ -48,7 +63,7 @@ class Matrix:
         return self
 
 
-# exec(stdin.read())
+exec(stdin.read())
 
 # m = Matrix([[1, 0], [0, 1]])
 # print(m)
@@ -87,7 +102,7 @@ class Matrix:
 # print(m)
 # print(m1)
 
-m = Matrix([[10, 10], [0, 0], [1, 1]])
-print(m)
-print(Matrix.transposed(m))
-print(m)
+# m = Matrix([[10, 10], [0, 0], [1, 1]])
+# print(m)
+# print(Matrix.transposed(m))
+# print(m)
