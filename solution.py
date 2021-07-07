@@ -4,4 +4,6 @@ import datetime
 import time
 
 
-print(datetime.date(1972, 4, 15))
+d = datetime.datetime(1972, 4, 15, 23, 12, 11)
+print(datetime.datetime.now())
+
