@@ -1,7 +1,8 @@
-'''https://python-scripts.com/datetime-time-python'''
+def f(lst):
+    # lst.append(10)
+    lst = lst + [10]
 
-import datetime
-import time
 
-print(time.time())
-
+x = [7, 8, 9]
+f(x)
+print(x)
