@@ -1,10 +1,12 @@
 import socket
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# сервер привязываем к сокету
 server.bind(('127.15.4.72', 1504))
+# сервер слушает. Очередь из четверых клиентов максимум
 server.listen(4)
-print('Жду-с...')
 
+# прием соединений:
 client_socket, address = server.accept()
 data = client_socket.recv(1024).decode('utf-8')
 print(data)
