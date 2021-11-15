@@ -1,14 +1,6 @@
-import socket
+from sys import getsizeof
+from pympler import asizeof
 
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(('127.15.4.72', 1504))
-server.listen(4)
-print('Жду-с...')
+name = {300, 301, 302}
 
-client_socket, address = server.accept()
-data = client_socket.recv(1024).decode('utf-8')
-print(data)
-
-HEDER = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\n'.encode('utf-8')
-content = 'Все прошло пучком!'.encode('utf-8')
-client_socket.send(HEDER + content)
+print(getsizeof(name), asizeof.asizeof(name))
