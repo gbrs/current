@@ -1,11 +1,54 @@
-import random
-
-print(*sorted([random.normalvariate(0, 1) for _ in range(100)]), sep='\n')
+dct = {}
+for x in range(20, 10, -1):
+    dct[x] = x**2
+for x in range(10):
+    dct[x] = x ** 2
+dct = sorted(dct.items(), key=lambda item: (item[0], item[1]))
+print(dct)
 
 '''
 --------------------------------
 
+st = set()
+for x in range(15):
+    st.add(x)
+for x in range(20, 5, -1):
+    st.add(x)
+st.pop()
+print(st)
 
+
+--------------------------------
+
+dct = {}
+for x in range(20, 10, -1):
+    dct[x] = x**2
+for x in range(10):
+    dct[x] = x ** 2
+dct = sorted(dct.items(), key=lambda item: [item[0], item[1]])
+print(dct)
+
+--------------------------------
+
+def foo(y):
+    y.append(6)
+    return y
+
+
+x = [5]
+print(foo(x))
+print(x)
+
+--------------------------------
+
+print([*{1: 1, 2: 4, 3: 9}.items()])
+print(dict([(1, 1), (2, 4), (3, 9)]))
+
+--------------------------------
+
+import random
+
+print(*sorted([random.normalvariate(0, 1) for _ in range(100)]), sep='\n')
 
 --------------------------------
 
@@ -17,7 +60,6 @@ from itertools import product
 from functools import reduce
 s = 'aFmbkSfHdGlFHfhcAFGDYHBB'
 print(reduce(lambda count, item: count + ('a' <= item <= 'z'), s, 0))
-
 
 --------------------------------
 
