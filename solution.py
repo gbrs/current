@@ -1,12 +1,26 @@
-dct = {}
-for x in range(20, 10, -1):
-    dct[x] = x**2
-for x in range(10):
-    dct[x] = x ** 2
-dct = sorted(dct.items(), key=lambda item: (item[0], item[1]))
-print(dct)
+dct = {'a': 1, 'b': 2, 'c': 3}
+d = dct.items()
+print(type(d))
 
 '''
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+list_2D = [[4, 5, 6, 7], [2, 3], [1], []]
+answer = sum(map(len, list_2D))
+answer = sum([len(i) for i in list_2D])
+answer = sum(list_2D, key=len)
+print(answer)
+
 --------------------------------
 
 st = set()
