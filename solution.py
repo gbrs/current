@@ -153,4 +153,21 @@ mile_distances = [1, 3, 10]
 kilometer_distances = [x * 1.6 for x in mile_distances]
 # kilometer_distances = list(map(lambda x: x * 1.6, mile_distances))
 print(kilometer_distances)
+
+"""
+https://www.youtube.com/c/MackNack/videos
+https://www.youtube.com/c/FeyginLive/videos
+https://www.youtube.com/c/arestovych/videos
+https://www.youtube.com/channel/UCzaqqlriSjVyc795m86GVyg/videos Laty
+https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw/videos ZhGv
+https://www.youtube.com/c/NavalnyLiveChannel/videos
+https://www.youtube.com/c/Популярнаяполитика/videos
+https://www.youtube.com/user/tdzyadko/videos
+https://www.youtube.com/c/NevzorovTV/videos
+https://www.youtube.com/c/SergeyAleksashenkoSr/videos
+https://www.youtube.com/channel/UCL1rJ0ROIw9V1qFeIN0ZTZQ/videos Shul
+https://www.youtube.com/c/ivarlamov/videos
+https://www.youtube.com/c/Редакция/videos
+"""
+
 '''
