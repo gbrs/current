@@ -83,27 +83,13 @@ from functools import reduce
 s = 'aFmbkSfHdGlFHfhcAFGDYHBB'
 print(reduce(lambda count, item: count + ('a' <= item <= 'z'), s, 0))
 
---------------------------------
-
-# from functools import reduce
-from memory_profiler import profile
-
-@profile
-def main():
-    lst = [3 for _ in range(10**6)]
-    result_count = len([1 for i in lst if i % 2 == 0])
-    # result_count = reduce(lambda count, item: count + (item % 2 == 0), lst, 0)
-    print(result_count)
-
-
-main()
-
 -------------------
 
 """
 https://www.youtube.com/c/MackNack/videos
 https://www.youtube.com/c/FeyginLive/videos
 https://www.youtube.com/c/arestovych/videos
+https://www.youtube.com/c/maxkatz1
 https://www.youtube.com/channel/UCzaqqlriSjVyc795m86GVyg/videos Laty
 https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw/videos ZhGv
 https://www.youtube.com/c/NavalnyLiveChannel/videos
