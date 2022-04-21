@@ -17,9 +17,7 @@ print(getsizeof(lst))
 
 --------------------------------
 
-dct = {'a': 1, 'b': 2, 'c': 3}
-d = dct.items()
-print(type(d))
+
 
 --------------------------------
 
@@ -86,9 +84,10 @@ print(reduce(lambda count, item: count + ('a' <= item <= 'z'), s, 0))
 -------------------
 
 """
-https://www.youtube.com/c/MackNack/videos
 https://www.youtube.com/c/FeyginLive/videos
 https://www.youtube.com/c/arestovych/videos
+https://www.youtube.com/channel/UC111NXlcDs0VGfyre6EiPmA/videos Zhd
+https://www.youtube.com/c/MackNack/videos
 https://www.youtube.com/c/maxkatz1/videos
 https://www.youtube.com/channel/UCzaqqlriSjVyc795m86GVyg/videos Laty
 https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw/videos ZhGv
