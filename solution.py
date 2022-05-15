@@ -88,6 +88,7 @@ https://www.youtube.com/c/FeyginLive/videos
 https://www.youtube.com/c/arestovych/videos
 https://www.youtube.com/channel/UC111NXlcDs0VGfyre6EiPmA/videos Zhd
 https://www.youtube.com/c/MackNack/videos
+https://www.youtube.com/c/IvanYakovina/videos
 https://www.youtube.com/c/maxkatz1/videos
 https://www.youtube.com/channel/UCzaqqlriSjVyc795m86GVyg/videos Laty
 https://www.youtube.com/c/NavalnyLiveChannel/videos
@@ -98,7 +99,6 @@ https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw/videos ZhGv
 https://www.youtube.com/c/SergeyAleksashenkoSr/videos
 https://www.youtube.com/channel/UCL1rJ0ROIw9V1qFeIN0ZTZQ/videos Shul
 https://www.youtube.com/c/ivarlamov/videos
-https://www.youtube.com/playlist?list=PLVuua2p4R2LcrWhhiJe8bNpxRrPXjVt-n
 https://www.youtube.com/c/Редакция/videos
 https://www.youtube.com/c/Популярнаяполитика/videos
 """
