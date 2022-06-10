@@ -1,3 +1,31 @@
+import os
+
+# os.mkdir('DELETE')
+# os.chdir('./DELETE')
+# os.chdir('..')
+# os.chdir('./current')
+# os.chdir('./DELETE')
+# os.mkdir('DEL')
+os.chdir('./DELETE')
+print(os.getcwd())
+os.remove('DEL')
+print(os.getcwd())
+print(*os.listdir(), sep='\n')
+
+'''
+
+
+--------------------------------
+
+import requests
+
+url = 'https://httpbin.org/headers'
+response = requests.get(url)
+
+print(response.headers)
+
+--------------------------------
+
 from sys import getsizeof
 lst = [1, 2, 3, 4]
 print(getsizeof(lst))
@@ -7,17 +35,6 @@ lst = [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]]
 print(getsizeof(lst))
 lst = [[1, 2, 3, 4], 'fdgfd', 5, {x: x**2 for x in range(1000)}]
 print(getsizeof(lst))
-
-'''
-
-
---------------------------------
-
-
-
---------------------------------
-
-
 
 --------------------------------
 
