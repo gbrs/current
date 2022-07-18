@@ -1,8 +1,9 @@
-def division(a, b):
-    return a / b
+dct = {1: 9, 2: 5, 3: 7, 4: 9}
+print(min(dct, key=lambda x: (-dct[x], x)))
+print(min(dct.keys(), key=lambda x: (-dct[x], x)))
+print(sorted(dct, key=lambda x: (-dct[x], x)))
+print(sorted(dct.keys(), key=lambda x: (-dct[x], x)))
 
-
-print(division(10, -2))
 
 '''
 --------------------------------
@@ -19,6 +20,10 @@ print(division(10, -2))
 
 --------------------------------
 
+def division(a, b):
+    return a / b
+
+print(division(10, -2))
 
 --------------------------------
 import os
@@ -133,7 +138,7 @@ https://www.youtube.com/user/tdzyadko/videos
 https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw/videos ZhGv
 https://www.youtube.com/c/SergeyAleksashenkoSr/videos
 https://www.youtube.com/channel/UCL1rJ0ROIw9V1qFeIN0ZTZQ/videos Shul
-https://www.youtube.com/c/Популярнаяполитика/videos
+https://www.youtube.com/c/popularpolitics/videos
 """
 
 """
