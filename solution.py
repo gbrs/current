@@ -133,7 +133,7 @@ https://www.youtube.com/c/MackNack/videos
 https://www.youtube.com/c/maxkatz1/videos
 https://www.youtube.com/channel/UCzaqqlriSjVyc795m86GVyg/videos Laty
 https://www.youtube.com/c/NavalnyLiveChannel/videos
-https://www.youtube.com/c/bananTV/videos
+https://www.youtube.com/user/BananDW  ktznew
 https://www.youtube.com/user/tdzyadko/videos
 https://www.youtube.com/channel/UCWAIvx2yYLK_xTYD4F2mUNw/videos ZhGv
 https://www.youtube.com/c/SergeyAleksashenkoSr/videos
