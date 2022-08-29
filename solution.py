@@ -145,7 +145,7 @@ https://www.youtube.com/channel/UCBzDAjLfvBUBVMMP6-K-y0w/videos
 """
 https://web.telegram.org/z/#-1000150092 сит
 https://web.telegram.org/z/#-1223675293 твиттер
-https://web.telegram.org/z/#-1634647964 уаналитик
+https://t.me/zvizdecmanhustu уаналитик
 https://web.telegram.org/z/#-1074354585 военный осведомитель
 """
 
