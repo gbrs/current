@@ -150,6 +150,14 @@ https://web.telegram.org/z/#-1074354585 военный осведомитель
 """
 
 """
+карты
+https://deepstatemap.live
+https://liveuamap.com
+https://www.google.com/maps/d/viewer?mid=1lscRK6ehG0l2V-XvJ16nsyblMsQ&hl=en_US&ll=49.622124783582485%2C32.41804124113801&z=7
+https://twitter.com/War_Mapper
+"""
+
+"""
 https://www.youtube.com/c/IvanYakovina/videos
 https://www.youtube.com/c/NevzorovTV/videos
 https://www.youtube.com/c/ivarlamov/videos
