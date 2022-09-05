@@ -1,8 +1,14 @@
-dct = {1: 9, 2: 5, 3: 7, 4: 9}
-print(min(dct, key=lambda x: (-dct[x], x)))
-print(min(dct.keys(), key=lambda x: (-dct[x], x)))
-print(sorted(dct, key=lambda x: (-dct[x], x)))
-print(sorted(dct.keys(), key=lambda x: (-dct[x], x)))
+import re
+
+s = '''Привет! 
+        Как вы там? 
+        Увидимся'''
+
+print(re.search('^Привет', s)[0])
+print(re.search('Увидимся$', s)[0])
+print(re.search('^Привет|Увидимся$', s)[0])
+print(re.search('[а-яА-Я]{8}', s)[0])
+
 
 
 '''
@@ -17,6 +23,11 @@ print(sorted(dct.keys(), key=lambda x: (-dct[x], x)))
 
 --------------------------------
 
+dct = {1: 9, 2: 5, 3: 7, 4: 9}
+print(min(dct, key=lambda x: (-dct[x], x)))
+print(min(dct.keys(), key=lambda x: (-dct[x], x)))
+print(sorted(dct, key=lambda x: (-dct[x], x)))
+print(sorted(dct.keys(), key=lambda x: (-dct[x], x)))
 
 --------------------------------
 
