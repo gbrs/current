@@ -175,7 +175,13 @@ https://deepstatemap.live
 https://liveuamap.com
 https://www.google.com/maps/d/viewer?mid=1lscRK6ehG0l2V-XvJ16nsyblMsQ&hl=en_US&ll=49.622124783582485%2C32.41804124113801&z=7
 https://twitter.com/War_Mapper
+https://twitter.com/defmon3
 """
+
+"""
+https://web.telegram.org/z/#-1646703906
+"""
+
 
 """
 https://www.youtube.com/c/IvanYakovina/videos
