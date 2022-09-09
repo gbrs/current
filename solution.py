@@ -1,15 +1,16 @@
-import re
+import hashlib
 
-s = '''Привет! 
-        Как вы там? 
-        Увидимся'''
-
-print(re.search('^Привет', s)[0])
-print(re.search('Увидимся$', s)[0])
-print(re.search('^Привет|Увидимся$', s)[0])
-print(re.search('[а-яА-Я]{8}', s)[0])
-
-
+i = 'привет!'.encode('utf-8')
+print(hash(i))
+m = hashlib.sha256()
+m.update(i)
+print(m.hexdigest())
+m = hashlib.sha1()
+m.update(i)
+print(m.hexdigest())
+m = hashlib.md5()
+m.update(i)
+print(m.hexdigest())
 
 '''
 --------------------------------
@@ -20,6 +21,14 @@ print(re.search('[а-яА-Я]{8}', s)[0])
 
 --------------------------------
 
+import re
+
+s = 'Привет! Как вы там? Увидимся'
+
+print(re.search('^Привет', s)[0])
+print(re.search('Увидимся$', s)[0])
+print(re.search('^Привет|Увидимся$', s)[0])
+print(re.search('[а-яА-Я]{8}', s)[0])
 
 --------------------------------
 
