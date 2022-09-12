@@ -1,23 +1,38 @@
-import hashlib
+import re
 
-i = 'привет!'.encode('utf-8')
-print(hash(i))
-m = hashlib.sha256()
-m.update(i)
-print(m.hexdigest())
-m = hashlib.sha1()
-m.update(i)
-print(m.hexdigest())
-m = hashlib.md5()
-m.update(i)
-print(m.hexdigest())
+s = 'sdfa $500 400$ sdfdf $300$ dsg'
+
+print(re.search('\d+(?=\$)', s)[0])
+print(re.search('(?<=\$)\d+', s)[0])
+
 
 '''
 --------------------------------
 
 
+
 --------------------------------
 
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+import re
+
+s = 'https://www.youtube https://yandex.ru/search/?clid=9582&text=регулярное+выражение+адрес+сайта&l10n=ru&lr=2'
+
+print(re.search('(http|https)(://)([a-zA-Z0-9.-_]+)\.(ru|com)', s)[0])
 
 --------------------------------
 
@@ -175,13 +190,7 @@ https://deepstatemap.live
 https://liveuamap.com
 https://www.google.com/maps/d/viewer?mid=1lscRK6ehG0l2V-XvJ16nsyblMsQ&hl=en_US&ll=49.622124783582485%2C32.41804124113801&z=7
 https://twitter.com/War_Mapper
-https://twitter.com/defmon3
 """
-
-"""
-https://web.telegram.org/z/#-1646703906
-"""
-
 
 """
 https://www.youtube.com/c/IvanYakovina/videos
