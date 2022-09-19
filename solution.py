@@ -1,10 +1,85 @@
-import re
+imax = 0
+jmax = 0
+# j0 = -1
+# j1 = -1
+# j2 = -1
+i0 = 0
+i1 = -1
+i2 = -1
 
-s = 'sdfa $500 400$ sdfdf $300$ dsg'
+n = int(input())
+a = list(map(int, input().split()))
+p = [0] * (n + 1)
+for i in range(1, n + 1):
+    p[i] = p[i - 1] + a[i - 1]
+print(*p)
 
-print(re.search('\d+(?=\$)', s)[0])
-print(re.search('(?<=\$)\d+', s)[0])
+for j in range(1, n + 1):
+    # print(p[j], imin0, imin1, imin2, ibest, jbest, p[jbest] - p[ibest])
 
+    if p[j] % 3 == 0 and j - 0 > jmax - imax:
+        jmax = j
+        imax = 0
+    elif p[j] % 3 == 1:
+        if i1 == -1:
+            i1 = j
+        elif j - i1 > jmax - imax:
+            jmax = j
+            imax = i1
+    else:
+        if i2 == -1:
+            i2 = j
+        elif j - i2 > jmax - imax:
+            jmax = j
+            imax = i2
+
+if jmax == 0:
+    print(-1)
+else:
+    print(imax + 1, jmax)
+# print(f'{j0} - {i0} = {j0 - i0}, {j1} - {i1} = {j1 - i1}, {j2} - {i2} = {j2 - i2}')
+
+
+'''
+0
+3
+
+1
+-3
+
+1
+15
+
+1
+25
+
+5
+4 1 -1 2 5
+
+3
+6 -1 1
+
+5
+1 2 3 4 5
+
+4
+1 2 3 4
+
+4
+-1 2 3 4
+
+!5
+-1 0 -1 0 -1
+
+5
+-1 -1 -1 -1 -1
+
+!5
+-1 0 0 0 0
+
+3
+-1 6 -1
+'''
 
 '''
 --------------------------------
@@ -21,11 +96,63 @@ print(re.search('(?<=\$)\d+', s)[0])
 
 --------------------------------
 
+ibest = 0
+jbest = 0
+imin0 = 0
+imin1 = 0
+imin2 = 0
 
+n = int(input())
+a = list(map(int, input().split()))
+p = [0] * (n + 1)
+for i in range(1, n + 1):
+    p[i] = p[i - 1] + a[i - 1]
+# print(*p)
+
+for j in range(1, n + 1):
+    # print(p[j], imin0, imin1, imin2, ibest, jbest, p[jbest] - p[ibest])
+
+    if p[j] % 3 == 0:
+        if (p[j] - p[imin0]) % 3 == 0 and p[j] - p[imin0] > p[jbest] - p[ibest]:
+            jbest = j
+            ibest = imin0
+        elif ibest == 0 and jbest == 0:
+            jbest = j
+        if p[j] < p[imin0]:
+            imin0 = j
+    elif p[j] % 3 == 1:
+        if (p[j] - p[imin1]) % 3 == 0 and p[j] - p[imin1] > p[jbest] - p[ibest]:
+            jbest = j
+            ibest = imin1
+        elif p[j] - p[imin1] == 0 and jbest == 0 and ibest == 0:
+            jbest = j
+            ibest = imin1
+        if p[j] < p[imin1] or imin1 == 0:
+            imin1 = j
+    else:
+        if (p[j] - p[imin2]) % 3 == 0 and p[j] - p[imin2] > p[jbest] - p[ibest]:
+            jbest = j
+            ibest = imin2
+        elif p[j] - p[imin2] == 0 and jbest == 0 and ibest == 0:
+            jbest = j
+            ibest = imin2
+        if p[j] < p[imin2] or imin2 == 0:
+            imin2 = j
+
+# print(p[j], imin0, imin1, imin2, ibest, jbest, p[jbest] - p[ibest])
+if jbest == 0:
+    print(-1)
+else:
+    print(ibest + 1, jbest)
 
 --------------------------------
 
+import re
 
+s = 'sdfa $500 400$ sdfdf $300$ dsg'
+
+print(re.search('\d+(?=\$)', s)[0])
+print(re.search('(?<=\$)\d+', s)[0])
 
 --------------------------------
 import re
@@ -96,54 +223,10 @@ print(getsizeof(lst))
 lst = [[1, 2, 3, 4], 'fdgfd', 5, {x: x**2 for x in range(1000)}]
 print(getsizeof(lst))
 
---------------------------------
-
-list_2D = [[4, 5, 6, 7], [2, 3], [1], []]
-answer = sum(map(len, list_2D))
-answer = sum([len(i) for i in list_2D])
-answer = sum(list_2D, key=len)
-print(answer)
-
---------------------------------
-
-st = set()
-for x in range(15):
-    st.add(x)
-for x in range(20, 5, -1):
-    st.add(x)
-st.pop()
-print(st)
 
 
---------------------------------
-
-dct = {}
-for x in range(20, 10, -1):
-    dct[x] = x**2
-for x in range(10):
-    dct[x] = x ** 2
-dct = sorted(dct.items(), key=lambda item: [item[0], item[1]])
-print(dct)
 
 
---------------------------------
-
-import random
-
-print(*sorted([random.normalvariate(0, 1) for _ in range(100)]), sep='\n')
-
---------------------------------
-
-from itertools import product
-[print(*i, sep='', end=' ') for i in list(product('ABC', 'XYZ'))]
-
---------------------------------
-
-from functools import reduce
-s = 'aFmbkSfHdGlFHfhcAFGDYHBB'
-print(reduce(lambda count, item: count + ('a' <= item <= 'z'), s, 0))
-
--------------------
 
 """
 https://www.youtube.com/c/FeyginLive/videos
@@ -167,8 +250,6 @@ https://web.telegram.org/z/#-1000150092 сит
 https://web.telegram.org/z/#-1223675293 твиттер
 https://t.me/zvizdecmanhustu уаналитик
 https://web.telegram.org/z/#-1074354585 военный осведомитель
-https://web.telegram.org/z/#-1326223284 Рыбарь
-https://web.telegram.org/z/#-1513431778 Два майора
 """
 
 """
