@@ -125,21 +125,6 @@ for x in range(10):
 dct = sorted(dct.items(), key=lambda item: [item[0], item[1]])
 print(dct)
 
---------------------------------
-
-def foo(y):
-    y.append(6)
-    return y
-
-
-x = [5]
-print(foo(x))
-print(x)
-
---------------------------------
-
-print([*{1: 1, 2: 4, 3: 9}.items()])
-print(dict([(1, 1), (2, 4), (3, 9)]))
 
 --------------------------------
 
@@ -182,6 +167,8 @@ https://web.telegram.org/z/#-1000150092 сит
 https://web.telegram.org/z/#-1223675293 твиттер
 https://t.me/zvizdecmanhustu уаналитик
 https://web.telegram.org/z/#-1074354585 военный осведомитель
+https://web.telegram.org/z/#-1326223284 Рыбарь
+https://web.telegram.org/z/#-1513431778 Два майора
 """
 
 """
