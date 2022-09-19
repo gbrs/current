@@ -250,6 +250,8 @@ https://web.telegram.org/z/#-1000150092 сит
 https://web.telegram.org/z/#-1223675293 твиттер
 https://t.me/zvizdecmanhustu уаналитик
 https://web.telegram.org/z/#-1074354585 военный осведомитель
+Рыбарь
+Два майора
 """
 
 """
