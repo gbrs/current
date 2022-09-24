@@ -1,3 +1,28 @@
+N = int(input())
+p = [0]
+jmin = 0
+jmax = 1
+imin = 0
+
+for i in range(1, N + 1):
+    # print(i, imin, jmin, jmax)
+    p.append(p[i - 1] + int(input()))
+    if p[i] <= p[imin]:
+        imin = i
+    # print(p[i] - p[imin])
+    if p[i] - p[imin] > p[jmax] - p[jmin]:
+        jmin = imin
+        jmax = i
+print(imin, jmin, jmax)
+print(jmin + 1, jmax)
+
+'''
+--------------------------------
+
+
+
+--------------------------------
+
 import re
 
 s = 'Имя: Борис. День рождения: 15 апреля 1972г.'
@@ -8,15 +33,6 @@ if match is not None:
     print(f'Месяц рождения: {match.group(3)}')
 else:
     print('Формат строки не совпадает')
-
-'''
---------------------------------
-
-
-
---------------------------------
-
-
 
 --------------------------------
 
