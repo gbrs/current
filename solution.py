@@ -1,3 +1,100 @@
+'''
+Создайте класс Товар, который будет содержать переменные: название товара, артикул.
+
+Создайте класс Категория товара, который будет содержать переменные: название категории, товары в категории.
+Также необходимо реализовать метод, который позволит добавлять товары (объект класса Товар) в категорию (список).
+
+Далее создайте класс Пользователь, который будет содержать переменные: имя пользователя, любимые категории.
+Добавьте метод, который позволит "ставить лайк" категории товара (то есть объекту класса Категория товара).
+Поставить лайк - это добавить категорию в список любимых категорий.
+
+Далее реализуйте сценарий, в котором:
+
+Добавляем 2 произвольных товара
+Затем создаем 1 категория
+Далее в категорию добавляем 2 товара
+Добавляем 3 произвольных товара
+Создаем еще 2 категории
+В одну из новых категорий добавляем все 3 новых товара
+Затем выводим на экран содержимое всех 3 категорий
+Создаем пользователя
+Добавляем в любимые категории пользователя 2 произвольные категории и выводим их на экран
+'''
+
+
+# создаем три класса
+class Goods:
+    def __init__(self, name, code):
+        self.goods_name = name
+        self.vendor_code = code
+
+
+class GoodsCategory:
+    def __init__(self, name):
+        self.category_name = name
+        self.category_goods = []
+
+    def add_goods(self, goods):
+        self.category_goods.append(goods.goods_name)
+
+
+class User:
+    def __init__(self, name):
+        self.user_name = name
+        self.favorite_categories = []
+
+    def like_category(self, category):
+        self.favorite_categories.append(category.category_name)
+
+
+# создаем 2 товара, класс для них и добавляем товары в класс
+jeans = Goods('jeans', '4242')
+shirt = Goods('shirt', '2022')
+
+clothes = GoodsCategory('clothes')
+clothes.add_goods(jeans)
+clothes.add_goods(shirt)
+
+# создаем 3 товара, класс для них и добавляем товары в класс
+w_and_p = Goods('War and Peace', '1869')
+p_and_p = Goods('Pride and Prejudice', '1813')
+m_and_m = Goods('Master and Margarita', '1967')
+
+books = GoodsCategory('books')
+books.add_goods(w_and_p)
+books.add_goods(p_and_p)
+books.add_goods(m_and_m)
+
+# создаем третий класс, но не добавляем в него ничего
+cars = GoodsCategory('cars')
+
+# напечатаем товары, принадлежащие каждой категории
+print(clothes.category_goods, books.category_goods, cars.category_goods, sep='\n')
+print()
+
+# создадим пользователя и добавим его две любимые категории
+uzver = User('Uzverev Uzver Uzverevich')
+uzver.like_category(clothes)
+uzver.like_category(cars)
+
+# напечатаем любимые категории пользователя
+print(uzver.favorite_categories)
+
+'''
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
 N = int(input())
 p = [0]
 jmin = 0
@@ -7,19 +104,14 @@ imin = 0
 for i in range(1, N + 1):
     # print(i, imin, jmin, jmax)
     p.append(p[i - 1] + int(input()))
-    if p[i] <= p[imin]:
-        imin = i
     # print(p[i] - p[imin])
     if p[i] - p[imin] > p[jmax] - p[jmin]:
         jmin = imin
         jmax = i
+    if p[i] <= p[imin]:
+        imin = i
 print(imin, jmin, jmax)
 print(jmin + 1, jmax)
-
-'''
---------------------------------
-
-
 
 --------------------------------
 
