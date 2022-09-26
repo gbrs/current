@@ -42,7 +42,7 @@ class Preserves(Grocery):
     def __init__(self, mass, name, is_cooked, category):
         super().__init__(mass)
         self.name = name
-        self.is_cookied = is_cooked
+        self.is_cooked = is_cooked
         self.category = category
 
     def open(self):
@@ -62,10 +62,24 @@ class Porridge(Grocery):
         print(f'А теперь шашлык из крупы: {self.name}')
 
 
+print('Проверим класс круп')
 rice = Porridge(10, 'рис', False, False, True)
 rice.cook()
 rice.experiment()
+print(f'{rice.name}. {rice.quantity} кг.')
+print(f'Нуждается в приготовлении? {not rice.is_cooked}.')
+print(f'Нуждается в промывке? {not rice.is_washed}.')
+print(f'Может готовиться с молоком? {rice.is_milked}.')
+print()
 
+print('Проверим класс консервов')
+sprat_in_tomato_sauce = Preserves(0.280, "Килька в томатном соусе", True, 'рыбные')
+sprat_in_tomato_sauce.cook()
+sprat_in_tomato_sauce.open()
+'mass, name, is_cooked, category'
+print(f'{sprat_in_tomato_sauce.name}. {int(sprat_in_tomato_sauce.quantity * 1000)} гр.')
+print(f'Нуждается в приготовлении? {not sprat_in_tomato_sauce.is_cooked}.')
+print(f'Тип консервов: {sprat_in_tomato_sauce.category}')
 
 '''
 Продумайте план тестирования и протестируйте созданные классы
@@ -73,7 +87,6 @@ rice.experiment()
 выведите на экран,
 проверьте работоспособность методов).
 '''
-
 
 '''
 --------------------------------
