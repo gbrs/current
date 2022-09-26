@@ -27,6 +27,54 @@
 проверьте работоспособность методов).
 '''
 
+
+class Grocery:
+
+    def __init__(self, mass):
+        self.quantity = mass
+
+    def cook(self):
+        print(f'Начинаю приготовление: {self.name}')
+
+
+class Preserves(Grocery):
+
+    def __init__(self, mass, name, is_cooked, category):
+        super().__init__(mass)
+        self.name = name
+        self.is_cookied = is_cooked
+        self.category = category
+
+    def open(self):
+        print(f'Открываю банку консервов: {self.name}')
+
+
+class Porridge(Grocery):
+
+    def __init__(self, mass, name, is_cooked, is_washed, is_milked):
+        super().__init__(mass)
+        self.name = name
+        self.is_cooked = is_cooked
+        self.is_washed = is_washed
+        self.is_milked = is_milked
+
+    def experiment(self):
+        print(f'А теперь шашлык из крупы: {self.name}')
+
+
+rice = Porridge(10, 'рис', False, False, True)
+rice.cook()
+rice.experiment()
+
+
+'''
+Продумайте план тестирования и протестируйте созданные классы
+(создайте объекты,
+выведите на экран,
+проверьте работоспособность методов).
+'''
+
+
 '''
 --------------------------------
 
