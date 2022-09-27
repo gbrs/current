@@ -28,6 +28,7 @@
 '''
 
 
+# объявляем "надкласс" бакалея
 class Grocery:
 
     def __init__(self, mass):
@@ -37,9 +38,11 @@ class Grocery:
         print(f'Начинаю приготовление: {self.name}')
 
 
+# наследуем классы консервов и круп от класса бакалеи
 class Preserves(Grocery):
 
     def __init__(self, mass, name, is_cooked, category):
+        # скобочки после super!!!
         super().__init__(mass)
         self.name = name
         self.is_cooked = is_cooked
@@ -62,6 +65,7 @@ class Porridge(Grocery):
         print(f'А теперь шашлык из крупы: {self.name}')
 
 
+# проверим класс круп: запустим методы, выведем поля
 print('Проверим класс круп')
 rice = Porridge(10, 'рис', False, False, True)
 rice.cook()
@@ -72,6 +76,7 @@ print(f'Нуждается в промывке? {not rice.is_washed}.')
 print(f'Может готовиться с молоком? {rice.is_milked}.')
 print()
 
+# проверим класс консервов: запустим методы, выведем поля
 print('Проверим класс консервов')
 sprat_in_tomato_sauce = Preserves(0.280, "Килька в томатном соусе", True, 'рыбные')
 sprat_in_tomato_sauce.cook()
