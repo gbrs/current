@@ -57,3 +57,30 @@ done
 echo "bye"
 
 
+3.4.1
+#!/bin/bash
+qcd()
+{
+    if [[ ($1 -eq $2) ]] || [[ ($1 -eq 0) ]]
+    then
+        answer=$2
+    else
+        let "temp = $2 % $1"
+        qcd $temp $1
+    fi
+}
+
+
+read var1 var2
+while [[ -n $var1 ]]
+do
+    qcd $var1 $var2
+    #313788397 2546698687
+    echo GCD is $answer
+    read var1 var2
+done
+
+echo bye
+
+
+
