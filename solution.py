@@ -1,12 +1,37 @@
+import re
+
+s = '''asdf полуэкт
+assdf
+asdf
+'''
+
+with open('input.txt', encoding='utf-8') as f:
+    # print(f.read())
+    print(re.findall(r'(\b[А-Яа-яЁё]{7}\b)', f.read()))
+    # print(re.search(r'\b[А-Яа-яЁё]{7}\b', s).groups())
+    # print(re.search(r'\b[A-Za-z]{4}\b', s).group(0))
+
+
+'''
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+--------------------------------
+
+
+--------------------------------
+
 lst1 = list(range(0, 10))
 lst2 = list(range(9, -1, -1))
 
 for i, (x, y) in enumerate(zip(lst1, lst2)):
     print(i, x, y)
 
-
-
-'''
 --------------------------------
 
 """
