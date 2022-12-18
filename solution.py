@@ -1,28 +1,42 @@
 import re
 
-s = '''asdf полуэкт
+s = """полуэкт"""
+
+print(re.fullmatch(r'(\b[А-Яа-яЁё]{4,}\b)', s).group(0))  # .group(0))
+
+'''
+
+--------------------------------
+
+
+
+--------------------------------
+
+import re
+
+s = """asdf полуэкт 
+assdf азиа
+asdf выав
+"""
+
+itr = re.finditer(r'(\b[А-Яа-яЁё]{4}\b)', s)
+for i in itr:
+    print(i.start())
+
+--------------------------------
+
+import re
+
+s = """asdf полуэкт
 assdf
 asdf
-'''
+"""
 
 with open('input.txt', encoding='utf-8') as f:
     # print(f.read())
     print(re.findall(r'(\b[А-Яа-яЁё]{7}\b)', f.read()))
     # print(re.search(r'\b[А-Яа-яЁё]{7}\b', s).groups())
     # print(re.search(r'\b[A-Za-z]{4}\b', s).group(0))
-
-
-'''
-
---------------------------------
-
-
-
---------------------------------
-
-
---------------------------------
-
 
 --------------------------------
 
