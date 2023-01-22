@@ -1,3 +1,23 @@
+# | - | - - | | - - | - | - | | - | - | -
+import time
+from threading import Thread
+
+
+def tyani_tolkai(thread_number, added_char):
+    for i in range(10):
+        lst.append(added_char)
+        time.sleep(0.01)
+
+
+lst = []
+thread1 = Thread(target=tyani_tolkai, args=(1, '|'))
+thread2 = Thread(target=tyani_tolkai, args=(2, '-'))
+thread1.start()
+thread2.start()
+thread1.join()
+thread2.join()
+print(*lst)
+
 '''
 --------------------------------
 
@@ -6,6 +26,89 @@
 --------------------------------
 
 
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+# M a x| x| M a M x| a x| M a M x| a M x| a M a x| M a x| x| M a M a x|
+from threading import Thread
+
+
+def tyani_tolkai(thread_number, added_char):
+    for i in range(10):
+        lst.append(added_char)
+        time.sleep(0.01)
+
+
+lst = []
+
+thread1 = Thread(target=tyani_tolkai, args=(1, 'M'))
+thread2 = Thread(target=tyani_tolkai, args=(2, 'a'))
+thread3 = Thread(target=tyani_tolkai, args=(3, 'x|'))
+
+thread1.start()
+thread2.start()
+thread3.start()
+thread1.join()
+thread2.join()
+thread3.join()
+print(*lst)
+
+--------------------------------
+
+# исполнится за 2 секунды, а не за 6
+from threading import Thread
+import time
+
+
+def wait(thread_number, sleep_time):
+    time.sleep(sleep_time)
+    print(f'Закончен поток №{thread_number}')
+    print()
+
+
+N = 2
+
+thread1 = Thread(target=wait, args=(1, N,))
+thread2 = Thread(target=wait, args=(2, N,))
+thread3 = Thread(target=wait, args=(3, N,))
+
+start_time = time.time()
+thread1.start()
+thread2.start()
+thread3.start()
+
+thread1.join()
+thread2.join()
+thread3.join()
+print(time.time() - start_time)
 
 --------------------------------
 
