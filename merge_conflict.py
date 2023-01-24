@@ -14,4 +14,3 @@ lst = [{x: x ** 2 for x in range(1000)},
        {x: x ** 2 for x in range(1000)},
        {x: x ** 2 for x in range(1000)}]
 print(getsizeof(lst))
-# >>>>>>> master
