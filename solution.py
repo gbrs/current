@@ -1,22 +1,15 @@
-# | - | - - | | - - | - | - | | - | - | -
-import time
-from threading import Thread
-
-
-def tyani_tolkai(thread_number, added_char):
-    for i in range(10):
-        lst.append(added_char)
-        time.sleep(0.01)
-
-
-lst = []
-thread1 = Thread(target=tyani_tolkai, args=(1, '|'))
-thread2 = Thread(target=tyani_tolkai, args=(2, '-'))
-thread1.start()
-thread2.start()
-thread1.join()
-thread2.join()
-print(*lst)
+st = set()
+st.add(1)
+st.add(('1', '2', '3'))
+st.add('0')
+st.add(2)
+print(*st)
+st.pop()
+print(*st)
+st.pop()
+print(*st)
+st.pop()
+print(*st)
 
 '''
 --------------------------------
@@ -53,7 +46,25 @@ print(*lst)
 
 --------------------------------
 
+# | - | - - | | - - | - | - | | - | - | -
+import time
+from threading import Thread
 
+
+def tyani_tolkai(thread_number, added_char):
+    for i in range(10):
+        lst.append(added_char)
+        time.sleep(0.01)
+
+
+lst = []
+thread1 = Thread(target=tyani_tolkai, args=(1, '|'))
+thread2 = Thread(target=tyani_tolkai, args=(2, '-'))
+thread1.start()
+thread2.start()
+thread1.join()
+thread2.join()
+print(*lst)
 
 --------------------------------
 
