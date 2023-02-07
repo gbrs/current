@@ -1,15 +1,5 @@
-st = set()
-st.add(1)
-st.add(('1', '2', '3'))
-st.add('0')
-st.add(2)
-print(*st)
-st.pop()
-print(*st)
-st.pop()
-print(*st)
-st.pop()
-print(*st)
+from bs4 import BeautifulSoup
+
 
 '''
 --------------------------------
@@ -42,7 +32,18 @@ print(*st)
 
 --------------------------------
 
-
+st = set()
+st.add(1)
+st.add(('1', '2', '3'))
+st.add('0')
+st.add(2)
+print(*st)
+st.pop()
+print(*st)
+st.pop()
+print(*st)
+st.pop()
+print(*st)
 
 --------------------------------
 
