@@ -8,12 +8,10 @@ print(getsizeof(lst))
 lst = [[1, 2, 3, 4], 'fdgfd', 5, {x: x ** 2 for x in range(1000)}]
 print(getsizeof(lst))
 
-# коммент изменим
-
 lst = [{x: x ** 2 for x in range(1000)},
        {x: x ** 2 for x in range(1000)},
        {x: x ** 2 for x in range(1000)},
        {x: x ** 2 for x in range(1000)}]
 print(getsizeof(lst))
 
-print('новый принт добавим')
+print('фильм тугади')
