@@ -1,3 +1,7 @@
+i - интерактивный режим
+t - подключает виртуальный терминал
+В зависимости от установки возможно придется всегда писать sudo docker
+
 ### Получение информации о контейнерах
 docker ps  # Активные контейнеры
 docker ps -a  # Работающие контейнеры
@@ -18,6 +22,7 @@ docker push eon01/nginx
 ### Запуск и остановка контейнеров
 docker run -d -p 8080:80 nextcloud  # -d - в фоновом режиме
 docker run -it --name infinite -d eon01/infinite
+            --rm  # удалять контейнер при остановке
 docker rename infinite infinity  # Переименование контейнера
 docker rm infinite  # Удаление контейнера
 docker stop nginx  # Остановка
@@ -32,6 +37,7 @@ docker kill nginx
 docker images  # Список образов
 docker build .  # Создание образов
 docker build - < context.tar.gz
+docker build -t pylounge_flask_app:v1 pylounge_flask_app/
 docker rmi nginx  # Удаление образа
 docker load < ubuntu.tar.gz  # Загрузка репозитория в tar (из файла или стандартного ввода)
 docker save busybox > ubuntu.tar  # Сохранение образа в tar-архив
@@ -40,7 +46,7 @@ docker commit nginx  # Создание образа из контейнера
 docker push eon01/nginx  # Push (загрузка в реестр) образа
 
 
-### Очистка Docker
+### Очистка в Docker
 docker rm nginx  # Удаление работающего контейнера
 docker container prune  # Удаление всех остановленных контейнеров
 docker rmi nginx  # Удаление образа
@@ -49,13 +55,67 @@ docker rmi $(docker images -a -q)  # Удаление всех образов
 docker system prune  # Удаление всех неиспользуемых объектов
 
 
-
-
-
+### Изменение контейнера
 docker exec -it e176ec2e0cd6bash bash  ## “вход” внутрь контейнер для внесения в него изменений
-
-
-
-
+docker commit -m "Комментарий" -a "Кто изменил" container_id repository/new_image_name
+docker push eon01/nginx
 docker create -t -i eon01/infinite --name infinite
+
+
+docker volume create postgres_vol_1  # создать папку?
+
+
+# Пример докер-файла
+FROM ubuntu:latest
+MAINTAINER Maxim Melnikov 'pylounge@mail.ru'
+RUN apt-get update -qy
+RUN apt-get install -qy python3.8 python3-pip python3.8-dev
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+CMD ["python3","app.py"]
+
+
+docker run -d --rm \
+	--name postgres_1 \
+	-e POSTGRES_PASSWORD=postgres_admin \
+	-e POSTGRES_USER=postgres_admin \
+	-e POSTGRES_DB=test_app \
+	-v /custom/mount:/var/lib/postgresql/data \  # в какой нашей директории окажутся файлы БД
+	--net app_net
+	postgres:14
+
+
+https://labs.play-with-docker.com
+https://github.com/play-with-docker/play-with-docker
+
+#### postgres
+docker pull postgres
+docker run --rm -d \
+	--name postgres_1 \
+	-e POSTGRES_PASSWORD=postgres_admin \
+	-e POSTGRES_USER=postgres_admin \
+	-e POSTGRES_DB=test_app \
+	-v postgres_vol_1:/var/lib/postgresql/data \
+	postgres:14
+
+#### superset
+docker pull apache/superset
+docker run --rm -d -p 8080:8088 -e "SUPERSET_SECRET_KEY=12345" --name superset apache/superset
+docker exec -it superset superset fab create-admin \
+              --username admin \
+              --firstname Superset \
+              --lastname Admin \
+              --email admin@superset.com \
+              --password admin
+docker exec -it superset superset db upgrade
+docker exec -it superset superset load_examples
+docker exec -it superset superset init
+
+
+wget https://stepik.org/media/attachments/lesson/745992/%D0%9F%D0%B0%D1%81%D1%81%D0%B0%D0%B6%D0%B8%D1%80%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D0%BA_%D0%9C%D0%BE%D1%81%D0%9C%D0%B5%D1%82%D1%80%D0%BE_2.csv
+mv %D0%9F%D0%B0%D1%81%D1%81%D0%B0%D0%B6%D0%B8%D1%80%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D0%BA_%D0%9C%D0%BE%D1%81%D0%9C%D0%B5%D1%82%D1%80%D0%BE_2.csv 2.csv
+
+
+
 
