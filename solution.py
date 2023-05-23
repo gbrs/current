@@ -1,4 +1,16 @@
+def print_hello(name: str, upper: bool = False) -> None:
+    print(f'Hello, {name}')
+# def __init__(self, x: int, y: int) -> None:
 
+
+title: str
+name: str = 'John'
+
+name = 10
+title = [2, 5]
+
+print(name)
+print_hello(name)
 
 
 '''
