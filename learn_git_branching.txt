@@ -1,0 +1,15 @@
+Эксперименты с rebase и merge
+
+git commit
+git checkout -b new C1
+git commit
+git checkout -b feature C1
+git commit
+
+git rebase new main
+git rebase feature
+
+git merge main feature
+
+git rebase new
+git rebase feature main
