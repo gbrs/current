@@ -29,6 +29,8 @@ git fetch
 6.4
 git pull
 
-git fakeTeamwork foo 3
-
-
+6.5
+git clone
+git fakeTeamwork main 2
+git commit
+git pull
