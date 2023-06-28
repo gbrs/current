@@ -13,3 +13,22 @@ git merge main feature
 
 git rebase new
 git rebase feature main
+
+
+6.1
+git clone
+
+6.2
+git commit
+git checkout o/main
+git commit
+
+6.3
+git fetch
+
+6.4
+git pull
+
+git fakeTeamwork foo 3
+
+
