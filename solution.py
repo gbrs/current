@@ -1,5 +1,10 @@
-x = 200
-print(-3 * x**2 / (1 + (x**3 + 500)**2))
+dct = {x: x**2 for x in range(10)}
+
+# dct = {v:k for k, v in dct.items()}
+# dct = dict(zip(dct.values(), dct.keys()))
+dct = dict(zip(dct.values(), dct))
+
+print(dct)
 
 
 '''
@@ -21,7 +26,13 @@ print(-3 * x**2 / (1 + (x**3 + 500)**2))
 
 --------------------------------
 
+dct = {x: x**2 for x in range(10)}
 
+# dct = {v:k for k, v in dct.items()}
+# dct = dict(zip(dct.values(), dct.keys()))
+dct = dict(zip(dct.values(), dct))
+
+print(dct)
 
 --------------------------------
 
