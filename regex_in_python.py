@@ -1,16 +1,10 @@
 import re
 
-# сделать список строк?
-text = ''
-for _ in range(4):
-    text = text + input() + '\n'
-
-print(text)
-
-search = re.search(r'[Кк]од', text)
-print(search)
-if search:
-    print(search.span()[0])
+for i in range(1, 5):
+    search = re.search(r'[Кк]од', input().strip())
+    if search:
+        print(i, search.span()[0])
+        break
 else:
     print('код не найден')
 
@@ -50,7 +44,14 @@ if search:
 
 
 3.3.2
-
+import re
+for i in range(1, 5):
+    search = re.search(r'[Кк]од', input().strip())
+    if search:
+        print(i, search.span()[0])
+        break
+else:
+    print('код не найден')
 
 
 
