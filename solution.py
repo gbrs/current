@@ -1,8 +1,8 @@
-dct = {x: x**2 for x in range(10)}
+dct = {}
+lst = [10, 710, 708, 607, 90, 2007, 8606, 7, 107, 20, 75, 207, 802, 20507, 2, 971, 1, 8, 7, 16, 75, 250, 5, 67, 16]
 
-# dct = {v:k for k, v in dct.items()}
-# dct = dict(zip(dct.values(), dct.keys()))
-dct = dict(zip(dct.values(), dct))
+for val in lst:
+    dct[val % 10] = dct.get(val % 10, []) + [val]
 
 print(dct)
 
@@ -18,11 +18,22 @@ print(dct)
 
 --------------------------------
 
+dct = {}
+lst = [10, 710, 708, 607, 90, 2007, 8606, 7, 107, 20, 75, 207, 802, 20507, 2, 971, 1, 8, 7, 16, 75, 250, 5, 67, 16]
 
+for val in lst:
+    dct[val % 10] = dct.get(val % 10, []) + [val]
+
+print(dct)
 
 --------------------------------
 
+dct = {}
 
+for char in 'kjhgfgdfhghdfghkfhgajsj;sadhg':
+    dct[char] = dct.get(char, 0) + 1
+
+print(dct)
 
 --------------------------------
 
