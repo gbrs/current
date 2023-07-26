@@ -1,10 +1,41 @@
-dct = {x: x**2 for x in range(10)}
+'''def ok(x):
+    # print('x',x)
+    tom = 1
+    j = 0
+    for i in pages:
+        # print(j,i)
+        if i - j >= x:
+            if i - j == x:
+                j = i
+            else:
+                j = ti
+            tom += 1
+            # print(tom)
+        ti = i
+    if tom > TOM_AMOUNT:
+        return False
+    return True'''
 
-# dct = {v:k for k, v in dct.items()}
-# dct = dict(zip(dct.values(), dct.keys()))
-dct = dict(zip(dct.values(), dct))
 
-print(dct)
+N = int(input())
+pages = [int(i) for i in input().split()]
+TOM_AMOUNT = int(input())
+
+# заменяем страницы на префиксные суммы
+# for i in range(1, N):
+#     pages[i] += pages[i - 1]
+
+left = 0
+right = pages[-1]
+while right - left > 1:
+    center = (right + left) // 2
+    tom_counter = 0
+
+    if tom_counter > TOM_AMOUNT:
+        right = center
+    else:
+        left = center
+print(right)
 
 
 '''
