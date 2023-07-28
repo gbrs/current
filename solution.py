@@ -19,15 +19,64 @@
 3
 '''
 
+
+'''def ok(x):
+    # print('x',x)
+    tom = 1
+    j = 0
+    for i in pages:
+        # print(j,i)
+        if i - j >= x:
+            if i - j == x:
+                j = i
+            else:
+                j = ti
+            tom += 1
+            # print(tom)
+        ti = i
+    if tom > TOM_AMOUNT:
+        return False
+    return True'''
+
+
+# N = int(input())
+# pages = [int(i) for i in input().split()]
+# TOM_AMOUNT = int(input())
+
 N = 3
-a = list(map(int, '1 2 1'.split()))
-K = 3
+pages = list(map(int, '1 2 1'.split()))
+CHAPTER_AMOUNT = 3
 
-left = 1
-right = sum(a)
+# заменяем страницы на префиксные суммы
+# for i in range(1, N):
+#     pages[i] += pages[i - 1]
 
+left = 0
+right = pages[-1]
 
+while right - left > 1:
 
+    center = (right + left) // 2
+    chapter_counter = 0
+    start_chapter = 0
+    end_chapter = 0
+
+    while chapter_counter <= CHAPTER_AMOUNT and end_chapter < N:
+        if sum(pages[start_chapter]) > center:
+            left = center
+            break
+        elif sum(pages[start_chapter:end_chapter + 1]) <= center:
+            end_chapter += 1
+        else:
+            chapter_counter += 1
+            start_chapter = end_chapter = end_chapter + 1
+
+    if chapter_counter > CHAPTER_AMOUNT:
+        right = center
+    else:
+        left = center
+
+print(left, right)
 
 
 '''
@@ -44,10 +93,6 @@ right = sum(a)
 dct = {}
 lst = [10, 710, 708, 607, 90, 2007, 8606, 7, 107, 20, 75, 207, 802, 20507, 2, 971, 1, 8, 7, 16, 75, 250, 5, 67, 16]
 
-for val in lst:
-    dct[val % 10] = dct.get(val % 10, []) + [val]
-
-print(dct)
 
 --------------------------------
 
