@@ -1,12 +1,10 @@
 import re
 
-for i in range(1, 5):
-    search = re.search(r'[Кк]од', input().strip())
+for i in range(5):
+    search = re.search(r'(?<=Activation key: )([A-Z0-9]{5}-){4}[A-Z0-9]{5}', input().strip())
     if search:
-        print(i, search.span()[0])
+        print(search.group(0))
         break
-else:
-    print('код не найден')
 
 
 
@@ -53,6 +51,15 @@ for i in range(1, 5):
 else:
     print('код не найден')
 
+
+3.3.3
+import re
+
+for i in range(5):
+    search = re.search(r'(?<=Activation key: )([A-Z0-9]{5}-){4}[A-Z0-9]{5}', input().strip())
+    if search:
+        print(search.group(0))
+        break
 
 
 """
