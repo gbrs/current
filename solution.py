@@ -19,9 +19,7 @@
 3
 '''
 
-N = 3
-a = list(map(int, '1 2 1'.split()))
-K = 3
+
 '''def ok(x):
     # print('x',x)
     tom = 1
@@ -41,9 +39,13 @@ K = 3
     return True'''
 
 
-N = int(input())
-pages = [int(i) for i in input().split()]
-TOM_AMOUNT = int(input())
+# N = int(input())
+# pages = [int(i) for i in input().split()]
+# TOM_AMOUNT = int(input())
+
+N = 3
+pages = list(map(int, '1 2 1'.split()))
+CHAPTER_AMOUNT = 3
 
 # заменяем страницы на префиксные суммы
 # for i in range(1, N):
@@ -51,15 +53,30 @@ TOM_AMOUNT = int(input())
 
 left = 0
 right = pages[-1]
-while right - left > 1:
-    center = (right + left) // 2
-    tom_counter = 0
 
-    if tom_counter > TOM_AMOUNT:
+while right - left > 1:
+
+    center = (right + left) // 2
+    chapter_counter = 0
+    start_chapter = 0
+    end_chapter = 0
+
+    while chapter_counter <= CHAPTER_AMOUNT and end_chapter < N:
+        if sum(pages[start_chapter]) > center:
+            left = center
+            break
+        elif sum(pages[start_chapter:end_chapter + 1]) <= center:
+            end_chapter += 1
+        else:
+            chapter_counter += 1
+            start_chapter = end_chapter = end_chapter + 1
+
+    if chapter_counter > CHAPTER_AMOUNT:
         right = center
     else:
         left = center
-print(right)
+
+print(left, right)
 
 
 '''
