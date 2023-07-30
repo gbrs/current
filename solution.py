@@ -51,30 +51,28 @@ CHAPTER_AMOUNT = 3
 # for i in range(1, N):
 #     pages[i] += pages[i - 1]
 
-left = 0
-right = pages[-1]
+# возможное количество
+left = max(pages)
+right = sum(pages)
 
-while right - left > 1:
+while right - left > 0:
 
     center = (right + left) // 2
     chapter_counter = 0
     start_chapter = 0
     end_chapter = 0
 
-    while chapter_counter <= CHAPTER_AMOUNT and end_chapter < N:
-        if sum(pages[start_chapter]) > center:
-            left = center
-            break
-        elif sum(pages[start_chapter:end_chapter + 1]) <= center:
+    while chapter_counter < CHAPTER_AMOUNT and end_chapter < N:
+        if sum(pages[start_chapter:end_chapter + 1]) < center:
             end_chapter += 1
         else:
             chapter_counter += 1
-            start_chapter = end_chapter = end_chapter + 1
+            start_chapter = end_chapter
 
     if chapter_counter > CHAPTER_AMOUNT:
-        right = center
-    else:
         left = center
+    else:
+        right = center
 
 print(left, right)
 
