@@ -1,10 +1,7 @@
 import re
 
-for i in range(5):
-    search = re.search(r'(?<=Activation key: )([A-Z0-9]{5}-){4}[A-Z0-9]{5}', input().strip())
-    if search:
-        print(search.group(0))
-        break
+search = re.search(r't=[\w.\+]+', input().strip())
+print(search.group(0))
 
 
 
@@ -60,6 +57,12 @@ for i in range(5):
     if search:
         print(search.group(0))
         break
+
+
+3.3.4
+import re
+search = re.search(r't=[\w.\+]+', input().strip())
+print(search.group(0))
 
 
 """
