@@ -1,4 +1,70 @@
+
+
 '''
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+class Answer:
+    def subtractProductAndSum(self, n):
+        sm = 0
+        prod = 1
+        for number in map(int, list(str(n))):
+            sm += number
+            prod *= number
+        return prod - sm
+
+
+n = 128
+ans = Answer()
+print(ans.subtractProductAndSum(n))
+
+--------------------------------
+
+class Answer:
+    def numIdenticalPairs(self, nums):
+        cnt = 0
+        for i in range(len(nums) - 1):
+            for j in range(i + 1, len(nums)):
+                if nums[i] == nums[j]:
+                    cnt += 1
+        return cnt
+
+
+nums = [1, 2, 3, 1, 1, 3]
+
+ans = Answer()
+print(ans.numIdenticalPairs(nums))
+
+--------------------------------
+
+class Answer:
+    def shuffle(self, nums, n):
+        lst = []
+        for i in range(n):
+            lst.extend([nums[i], nums[n + i]])
+        return lst
+
+
+nums = [2, 5, 1, 3, 4, 7]
+n = 3
+
+ans = Answer()
+print(ans.shuffle(nums, n))
+
+--------------------------------
+
+"""
 Роман в томах
 В романе N глав. В i-той главе ai страниц. Требуется издать роман в K томах так, чтобы объём самого «толстого» тома
 был минимален. В каждом томе главы располагаются по порядку своих номеров.
@@ -17,26 +83,7 @@
 2
 Вывод
 3
-'''
-
-
-'''def ok(x):
-    # print('x',x)
-    tom = 1
-    j = 0
-    for i in pages:
-        # print(j,i)
-        if i - j >= x:
-            if i - j == x:
-                j = i
-            else:
-                j = ti
-            tom += 1
-            # print(tom)
-        ti = i
-    if tom > TOM_AMOUNT:
-        return False
-    return True'''
+"""
 
 
 # N = int(input())
@@ -75,16 +122,6 @@ while right - left > 0:
         right = center
 
 print(left, right)
-
-
-'''
---------------------------------
-
-
-
---------------------------------
-
-
 
 --------------------------------
 
