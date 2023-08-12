@@ -1,7 +1,8 @@
 import re
 
-search = re.search(r't=[\w.\+]+', input().strip())
-print(search.group(0))
+search = re.match(r'([a-z]+ ){11}[a-z]+', input().strip())
+if search:
+    print('Возможно, это seed-фраза')
 
 
 
@@ -63,6 +64,20 @@ for i in range(5):
 import re
 search = re.search(r't=[\w.\+]+', input().strip())
 print(search.group(0))
+
+
+3.4.1
+import re
+search = re.match(r'[A-Za-z]+', input().strip())
+if search:
+    print(f'Первое слово в предложении: {search.group(0)}')
+
+
+3.4.2
+import re
+search = re.match(r'([a-z]+ ){11}[a-z]+', input().strip())
+if search:
+    print('Возможно, это seed-фраза')
 
 
 """
