@@ -1,8 +1,7 @@
 import re
 
-search = re.match(r'([a-z]+ ){11}[a-z]+', input().strip())
-if search:
-    print('Возможно, это seed-фраза')
+search = re.match(r'.+(?=@)', input().strip())
+print(search.group(0))
 
 
 
@@ -78,6 +77,14 @@ import re
 search = re.match(r'([a-z]+ ){11}[a-z]+', input().strip())
 if search:
     print('Возможно, это seed-фраза')
+
+
+3.4.3
+import re
+
+search = re.match(r'.+(?=@)', input().strip())
+print(search.group(0))
+
 
 
 """
