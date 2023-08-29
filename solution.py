@@ -1,3 +1,9 @@
+counter = 0
+for i in range(1000, 10000):
+    a, b, c, d = map(int, list(str(i)))
+    if a + b == c + d or a + c == b + d or a + d == b + c:
+        counter += 1
+print(counter)
 
 
 '''
