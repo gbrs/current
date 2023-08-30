@@ -1,9 +1,22 @@
-counter = 0
-for i in range(1000, 10000):
-    a, b, c, d = map(int, list(str(i)))
-    if a + b == c + d or a + c == b + d or a + d == b + c:
-        counter += 1
-print(counter)
+n = 12
+basis = -10
+
+answer = ''
+
+while n != 0:
+    b = n % basis
+    a = n // basis
+    # ну, почему в питоне математически правильное округление???? )))
+    if b < 0:
+        b -= basis
+        a += 1
+    n = a
+    answer = str(b) + answer
+
+if answer == '':
+    answer = '0'
+
+print(answer)
 
 
 '''
@@ -17,7 +30,12 @@ print(counter)
 
 --------------------------------
 
-
+counter = 0
+for i in range(1000, 10000):
+    a, b, c, d = map(int, list(str(i)))
+    if a + b == c + d or a + c == b + d or a + d == b + c:
+        counter += 1
+print(counter)
 
 --------------------------------
 
