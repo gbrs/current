@@ -1,7 +1,3 @@
-import re
-
-search = re.match(r'.+(?=@)', input().strip())
-print(search.group(0))
 
 
 
@@ -86,5 +82,10 @@ search = re.match(r'.+(?=@)', input().strip())
 print(search.group(0))
 
 
+3.5.1
+import re
+
+search = re.fullmatch(r'\d{13,}', input().strip())
+print(True if search else False)
 
 """
