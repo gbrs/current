@@ -1,6 +1,5 @@
 
 
-
 """
 Код из курса "Регулярные выражения в Python"
 https://stepik.org/course/107335/syllabus
@@ -88,4 +87,17 @@ import re
 search = re.fullmatch(r'\d{13,}', input().strip())
 print(True if search else False)
 
+
+3.5.2
+import re
+
+search = re.fullmatch(r'[a-zA-Z0-9@#$%^&*()_\-+!?]{8,}', input().strip())
+print(True if search else False)
+
+
+3.5.3
+import re
+
+search = re.fullmatch(r'\+?(?:[0-9][ ()-]{0,2}){11}', input().strip())
+print(True if search else False)
 """
