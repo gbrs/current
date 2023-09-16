@@ -1,3 +1,7 @@
+from itertools import accumulate
+
+for i in accumulate([7, 2, 3], lambda a, b: a * b):
+    print(i)
 
 
 '''
@@ -7,7 +11,14 @@
 
 --------------------------------
 
+from pprint import pprint
 
+lst = [*range(10)]
+dct = {i: str(i) * 10 for i in range(5)}
+
+pprint(lst)
+pprint(dct)
+pprint(range(10))
 
 --------------------------------
 
