@@ -1,12 +1,42 @@
-for i in range(1, 500):
-    print(i ^ (i - 1), end=' ')
-    if i % 16 == 0:
-        print()
+
 
 '''
 --------------------------------
 
 
+
+--------------------------------
+
+
+
+--------------------------------
+
+from fractions import Fraction
+x = Fraction('3/4')
+y = Fraction(1.5)
+print(x / y)
+
+--------------------------------
+
+import decimal
+
+a = decimal.Decimal("1.2")
+b = decimal.Decimal("2.2")
+c = decimal.Decimal("3.4")
+d = a + b
+print("a:", a)
+print("b:", b)
+print("c:", c)
+print("a+b:", d)
+print(1.2 + 2.2 == 3.4)
+print("a+b==c?:", c == d)
+
+--------------------------------
+
+for i in range(1, 500):
+    print(i ^ (i - 1), end=' ')
+    if i % 16 == 0:
+        print()
 
 --------------------------------
 
