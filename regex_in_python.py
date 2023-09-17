@@ -100,4 +100,9 @@ import re
 
 search = re.fullmatch(r'\+?(?:[0-9][ ()-]{0,2}){11}', input().strip())
 print(True if search else False)
+
+
+3.5.4
+(?:\d*x?\^?\d?[+-]*\b)+
+
 """
