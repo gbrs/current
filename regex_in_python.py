@@ -1,3 +1,12 @@
+import re
+
+s = 'يحتاج الجسم القوي إلى عقل قوي'
+
+answer = re.finditer(r"\w+", s)
+
+for word in answer:
+    print(word.group(0))
+
 
 
 """
@@ -103,6 +112,21 @@ print(True if search else False)
 
 
 3.5.4
-(?:\d*x?\^?\d?[+-]*\b)+
+(?:\d*x?\^?\d?[+-]*\b)+  НЕ РАБОТАЕТ
+
+3.6.1
+import re
+
+s = 'يحتاج الجسم القوي إلى عقل قوي'
+
+answer = re.finditer(r"\w+", s)
+
+for word in answer:
+    print(word.group(0))
+
+
+
+
+
 
 """
