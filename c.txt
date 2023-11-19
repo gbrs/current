@@ -98,6 +98,7 @@ vector <int> vector_first(5);  // создаст пустой вектор дл�
 vector <char> vector_first(5, ‘!’);  // создаст пустой вектор длиной 5, заполненный “!”
 
 vector < vector <int> > arr(n, vector <int> (m));   двумерный вектор
+vector<vector<int>> vec( n , vector<int> (m, 0));   матрица n*m из ноликов
 
 a.push_back(temp);  // аналог append
 a.insert(pos, value);
