@@ -1,13 +1,33 @@
-from itertools import accumulate
+from math import cos
+k = 1
+j = 0
+size = 4
 
-for i in accumulate([7, 2, 3], lambda a, b: a * b):
-    print(i)
-
+print(cos(k / 10_000**(2 * j / size)))
 
 '''
 --------------------------------
 
 
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+from itertools import accumulate
+
+for i in accumulate([7, 2, 3], lambda a, b: a * b):
+    print(i)
 
 --------------------------------
 
