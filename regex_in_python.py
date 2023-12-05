@@ -1,19 +1,30 @@
+'''
 (?<=href=['\"]).+?(?=['\"])
 (?<=<a).+?(?=</a>)
-
+'''
 
 import re
 
 s = '''
-        05:51 22:57 23:02 07:64 14:73 09:09 09:51 47:61 48:17 52:74 77:29 12:25 06:39 36:26 02:06 09:37 69:11 58:50 
-        20:70 25:44 18:66 41:52 39:41 48:77 65:62 23:32 60:07 73:13 71:79 67:64 15:28 46:74 22:03 42:10 18:56 49:24 
-        78:66 07:48 04:47 49:78 18:42 45:16 01:64 26:39 06:01 72:58 76:75 75:13 44:58 53:50 46:25 00:47 00:18 78:69 
-        36:60 28:08 13:00 42:73 37:54 29:66 14:26 21:66 16:46 49:03 52:33 34:40 75:73 57:35 36:22 24:63 38:77 58:77 
-        76:17 65:73 46:03 47:42 26:35 76:41 32:73 62:76 77:12 56:44 48:27 37:25 73:77 79:79 76:29 44:05 66:47 20:11 
-        38:00 02:22 33:50 53:16 29:17 47:62 21:16 33:02 76:37 11:43
+        <html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" 
+        content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Пролистай вниз</title><link rel="stylesheet" href="./css/normalize.css">
+        <link rel="stylesheet" href="./css/style.css"><link rel="icon" href="./img/icon.jpg">
+        </head><body><header><h1 class="privet">Привет!<br>Пролистай страничку вниз.
+        </h1><img src="./img/photo.jpg" alt="" class="logo_icon">
+        </header><main><p class="paragraph">Чтобы продолжить - отправь боту любое фото.
+        </p></main><footer><a class="link" href="./img/photo.jpg" download="">Фото</a>
+        <p class="link">id стикера - CAACAgIAAxkBAAIDxWITCaZnaUelQ0SNlHMTrjd2klAmAAIBAQACVp29CiK-
+        nw64wuY0IwQ</p><a class="link" href="./img/tochno.txt" download="">Документ</a></footer></body></html>
 '''
 
-[print(date) for date in re.findall(r"\b(?:[01][0-9]:[0-5][0-9])|(?:[2][0-3]:[0-5][0-9])\b", s)]
+lst1 = re.findall(r"(?<=<a).+?(?=</a>)", s)
+
+# [print(date) for date in lst1]
+
+lst2 = [re.search(r"(?<=href=['\"]).+?(?=['\"])", x) for x in lst1]
+
+[print(date.group(0)) for date in lst2]
 
 
 
@@ -187,17 +198,19 @@ s = input()
 3.7.4
 import re
 
-s = '''
-        05:51 22:57 23:02 07:64 14:73 09:09 09:51 47:61 48:17 52:74 77:29 12:25 06:39 36:26 02:06 09:37 69:11 58:50 
-        20:70 25:44 18:66 41:52 39:41 48:77 65:62 23:32 60:07 73:13 71:79 67:64 15:28 46:74 22:03 42:10 18:56 49:24 
-        78:66 07:48 04:47 49:78 18:42 45:16 01:64 26:39 06:01 72:58 76:75 75:13 44:58 53:50 46:25 00:47 00:18 78:69 
-        36:60 28:08 13:00 42:73 37:54 29:66 14:26 21:66 16:46 49:03 52:33 34:40 75:73 57:35 36:22 24:63 38:77 58:77 
-        76:17 65:73 46:03 47:42 26:35 76:41 32:73 62:76 77:12 56:44 48:27 37:25 73:77 79:79 76:29 44:05 66:47 20:11 
-        38:00 02:22 33:50 53:16 29:17 47:62 21:16 33:02 76:37 11:43
-'''
+s = input()
 
 [print(date) for date in re.findall(r"\b(?:[01][0-9]:[0-5][0-9])|(?:[2][0-3]:[0-5][0-9])\b", s)]
 
+
+3.7.5
+import re
+
+s = input()
+
+lst1 = re.findall(r"(?<=<a).+?(?=</a>)", s)
+lst2 = [re.search(r"(?<=href=['\"]).+?(?=['\"])", x) for x in lst1]
+[print(date.group(0)) for date in lst2]
 
 
 
