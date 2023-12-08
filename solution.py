@@ -1,6 +1,19 @@
-print(33333333333334**2)
+def decorator_function(func):
+    def wrapper():
+        print('Функция-обёртка!')
+        print('Оборачиваемая функция: {}'.format(func))
+        print('Выполняем обёрнутую функцию...')
+        func()
+        print('Выходим из обёртки')
+    return wrapper
+
+# @decorator_function
+def hello_world():
+    print('Hello world!')
 
 
+wrapped_function = decorator_function(hello_world)
+wrapped_function()
 
 '''
 --------------------------------
