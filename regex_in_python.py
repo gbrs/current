@@ -1,31 +1,6 @@
-'''
-(?<=href=['\"]).+?(?=['\"])
-(?<=<a).+?(?=</a>)
-'''
-
 import re
-
-s = '''
-        <html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" 
-        content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Пролистай вниз</title><link rel="stylesheet" href="./css/normalize.css">
-        <link rel="stylesheet" href="./css/style.css"><link rel="icon" href="./img/icon.jpg">
-        </head><body><header><h1 class="privet">Привет!<br>Пролистай страничку вниз.
-        </h1><img src="./img/photo.jpg" alt="" class="logo_icon">
-        </header><main><p class="paragraph">Чтобы продолжить - отправь боту любое фото.
-        </p></main><footer><a class="link" href="./img/photo.jpg" download="">Фото</a>
-        <p class="link">id стикера - CAACAgIAAxkBAAIDxWITCaZnaUelQ0SNlHMTrjd2klAmAAIBAQACVp29CiK-
-        nw64wuY0IwQ</p><a class="link" href="./img/tochno.txt" download="">Документ</a></footer></body></html>
-'''
-
-lst1 = re.findall(r"(?<=<a).+?(?=</a>)", s)
-
-# [print(date) for date in lst1]
-
-lst2 = [re.search(r"(?<=href=['\"]).+?(?=['\"])", x) for x in lst1]
-
-[print(date.group(0)) for date in lst2]
-
+s = "The first one is heavy!This actually goes really well with Chris's workout he's doing."
+print(re.split(r"[.!?]", s))
 
 
 """
@@ -212,6 +187,11 @@ lst1 = re.findall(r"(?<=<a).+?(?=</a>)", s)
 lst2 = [re.search(r"(?<=href=['\"]).+?(?=['\"])", x) for x in lst1]
 [print(date.group(0)) for date in lst2]
 
+
+3.8.1
+import re
+s = "The first one is heavy!This actually goes really well with Chris's workout he's doing."
+print(re.split(r"[.!?]", s))
 
 
 
