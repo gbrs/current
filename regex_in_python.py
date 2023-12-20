@@ -1,6 +1,6 @@
 import re
-s = "The first one is heavy!This actually goes really well with Chris's workout he's doing."
-print(re.split(r"[.!?]", s))
+s = "Привет, как твои дела? Привет, нормально, учу регулярные выражения."
+print(re.split(r"[.!?, ]", s))
 
 
 """
@@ -194,5 +194,8 @@ s = "The first one is heavy!This actually goes really well with Chris's workout 
 print(re.split(r"[.!?]", s))
 
 
-
+3.8.2
+import re
+s = "Привет, как твои дела? Привет, нормально, учу регулярные выражения."
+print(re.split(r"[.!?, ]", s))
 """
