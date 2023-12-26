@@ -1,6 +1,6 @@
 import re
-s = "Привет, как твои дела? Привет, нормально, учу регулярные выражения."
-print(re.split(r"[.!?, ]", s))
+s = "Especially this one my kinda favourite, and here we go, you dropped it!"
+print(re.sub(r"[aeioyuAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ]", '!', s))
 
 
 """
@@ -198,4 +198,10 @@ print(re.split(r"[.!?]", s))
 import re
 s = "Привет, как твои дела? Привет, нормально, учу регулярные выражения."
 print(re.split(r"[.!?, ]", s))
+
+
+3.9.1
+import re
+s = "Especially this one my kinda favourite, and here we go, you dropped it!"
+print(re.sub(r"[aeioyuAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ]", '!', s))
 """
