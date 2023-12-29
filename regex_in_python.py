@@ -1,6 +1,8 @@
 import re
-s = "Especially this one my kinda favourite, and here we go, you dropped it!"
-print(re.sub(r"[aeioyuAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ]", '!', s))
+
+print(re.split(r'Категория: [А-ЯЁа-яё ]+\\n', 'Категория: Телефоны\nSupreme Burner\nMotorola Razr\nКатегория: Смарт часы и браслеты\nApple Watch 6\nGarmin Venu\nXiaomi Mi Smart Band 6\nКатегория: Игры\nSpore'))
+print(re.split(r'Категория: [А-ЯЁа-яё ]+\\n',  input()))
+
 
 
 """
@@ -188,6 +190,7 @@ lst2 = [re.search(r"(?<=href=['\"]).+?(?=['\"])", x) for x in lst1]
 [print(date.group(0)) for date in lst2]
 
 
+
 3.8.1
 import re
 s = "The first one is heavy!This actually goes really well with Chris's workout he's doing."
@@ -200,8 +203,15 @@ s = "Привет, как твои дела? Привет, нормально, �
 print(re.split(r"[.!?, ]", s))
 
 
+3.8.3
+import re
+s = '''Категория: Телефоны\nSupreme Burner\nMotorola Razr\nКатегория: Смарт часы и браслеты\nApple Watch 6\nGarmin Venu\nXiaomi Mi Smart Band 6\nКатегория: Игры\nSpore'''
+print(re.split(r"Категория: [А-Яа-яЁё ]+\n?", s))
+
+
+
 3.9.1
 import re
-s = "Especially this one my kinda favourite, and here we go, you dropped it!"
-print(re.sub(r"[aeioyuAEIOUауоыиэяюёеАУОЫИЭЯЮЁЕ]", '!', s))
+s = input()
+print(re.split(r"Категория: [А-Яа-яЁё ]+\\n", s))
 """
