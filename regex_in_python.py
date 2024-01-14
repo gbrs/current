@@ -1,6 +1,6 @@
 import re
-s = 'Maybe it’s my fault. Maybe I led you to believe it was easy, when it wasn’t. Maybe I made you think my highlights started at the free throw line, and not in the gym. Maybe I made you think that every shot I took was a game winner. That my game was built on flash, and not fire. Maybe it’s my fault that you didn’t see that failure gave me strength, that my pain was my motivation. Maybe I led you to believe that basketball was a God given gift, and not something I worked for, every single day of my life.'
-print(re.subn(r"[.?!,:]", '', s)[-1])
+s = '65,905 views  Nov 19, 2022'
+print(re.subn(r"[0-9]", 'X', s))
 
 
 
@@ -226,6 +226,11 @@ import re
 s = 'Maybe it’s my fault. Maybe I led you to believe it was easy, when it wasn’t. Maybe I made you think my highlights started at the free throw line, and not in the gym. Maybe I made you think that every shot I took was a game winner. That my game was built on flash, and not fire. Maybe it’s my fault that you didn’t see that failure gave me strength, that my pain was my motivation. Maybe I led you to believe that basketball was a God given gift, and not something I worked for, every single day of my life.'
 print(re.subn(r"[.?!,:]", '', s)[-1])
 
+
+3.10.2
+import re
+s = '65,905 views  Nov 19, 2022'
+print(re.subn(r"[0-9]", 'X', s))
 
 
 
