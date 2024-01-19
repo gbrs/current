@@ -1,6 +1,6 @@
 import re
-s = '65,905 views  Nov 19, 2022'
-print(re.subn(r"[0-9]", 'X', s))
+s = r'<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ !"#$%&\'()*+,-./0123456789:;'
+print(re.escape(s))
 
 
 
@@ -231,6 +231,14 @@ print(re.subn(r"[.?!,:]", '', s)[-1])
 import re
 s = '65,905 views  Nov 19, 2022'
 print(re.subn(r"[0-9]", 'X', s))
+
+
+3.11.1
+import re
+s = r'<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ !"#$%&\'()*+,-./0123456789:;'
+print(re.escape(s))
+
+
 
 
 
