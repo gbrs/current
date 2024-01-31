@@ -1,5 +1,5 @@
 import re
-s = r'<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ !"#$%&\'()*+,-./0123456789:;'
+s = r'https://regex101.com/'
 print(re.escape(s))
 
 
@@ -239,8 +239,9 @@ s = r'<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~абвг
 print(re.escape(s))
 
 
-
-
-
+3.11.2
+import re
+s = r'https://regex101.com/'
+print(re.escape(s))
 
 """
