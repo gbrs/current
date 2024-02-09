@@ -1,11 +1,3 @@
-def foo(x: list[int]) -> None:
-    for i in x:
-        print(i**2, end=' ')
-
-
-lst: list[int] = [*range(10)]
-
-foo(lst)
 
 
 '''
@@ -31,7 +23,69 @@ foo(lst)
 
 --------------------------------
 
+class Parent:
+    def __init__(self):
+        self.foo = 11
+        self._bar = 22
+        self.__baz = 33
 
+
+class Daughter(Parent):
+    def __init__(self):
+        super().__init__()
+        self.foo = 'переопределено'
+        self._bar = 'переопределено'
+        self.__baz = 'переопределено'
+
+t1 = Parent()
+print(dir(t1)[:3])
+t2 = Daughter()
+print(dir(t2)[:3])
+print(t1._Parent__baz, t2._Parent__baz, t2._Daughter__baz)
+t1._Parent__baz = 'другое'
+print(t1._Parent__baz, t2._Parent__baz, t2._Daughter__baz)
+t2._Parent__baz = 'перепереопределено'
+print(t1._Parent__baz, t2._Parent__baz, t2._Daughter__baz)
+
+--------------------------------
+
+s1 = 'три'кавычки'
+    очень
+    длинная
+    строка
+'три'кавычки'
+
+s2 = (
+    'очень '
+    'длинная '
+    'строка'
+)
+
+s3 = 'очень '\
+    'длинная '\
+    'строка'
+
+print(s1, s2, s3, sep='\n')
+
+--------------------------------
+
+lst = [
+    'пн'
+    'вт'
+]
+
+print(lst)
+
+--------------------------------
+
+def foo(x: list[int]) -> None:
+    for i in x:
+        print(i**2, end=' ')
+
+
+lst: list[int] = [*range(10)]
+
+foo(lst)
 
 --------------------------------
 
