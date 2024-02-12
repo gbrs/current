@@ -1,3 +1,7 @@
+from collections import namedtuple
+Car = namedtuple('Авто', 'цвет пробег имя_владельца')
+my_car = Car('красный', '127000', 'Петя')
+print(my_car)
 
 
 '''
