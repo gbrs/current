@@ -1,14 +1,7 @@
-from pprint import pprint  # pp
-dct1 = {x: x**2 for x in range(0, 3)}
-dct2 = {x: x**2 for x in range(3, 6)}
-dct3 = {x: (x+10)**2 for x in range(0, 3)}
-dct = {**dct2, **dct1, **dct3}
-[print(x, end=' ') for x in dct]
-print()
-# dct = dct1 | dct2 | dct3
-print(dct)
-pprint(dct)
-# pp(dct)   # попробовать на 3.10
+from functools import reduce
+
+lst = [[1, 2, 3], [4, 5], [], [6, 7, 8]]
+print(reduce(lambda cnt, x: cnt + len(x), lst, 0))
 
 '''
 --------------------------------
@@ -29,10 +22,18 @@ pprint(dct)
 
 --------------------------------
 
-from collections import namedtuple
-Car = namedtuple('Авто', 'цвет пробег имя_владельца')
-my_car = Car('красный', '127000', 'Петя')
-print(my_car)
+from pprint import pprint, pp
+dct1 = {x: x**2 for x in range(0, 3)}
+dct2 = {x: x**2 for x in range(3, 6)}
+dct3 = {x: (x+10)**2 for x in range(0, 10)}
+dct = {**dct2, **dct1, **dct3}
+[print(x, end=' ') for x in dct]
+print()
+# dct = dct1 | dct2 | dct3
+print(dct)
+pprint(dct)
+pp(dct)   # попробовать на 3.10
+# pp(dct[0], dct[1])
 
 --------------------------------
 
