@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const int INF = 1e9;
+int BFS(vector<string> &v, int sy, int sx, int fy, int fx) {
+    int a = v.size(), b = v[0].size();
+
+    vector<vector<int>> dist(a, vector<int>(b, INF));
+    queue<pair<int, int>> q;
+
+    dist[sy][sx] = 0;
+    q.push({sy, sx});
+
+    vector<int> dy = {-1, 0, 1, 0};
+    vector<int> dx = {-1, 0, 1, 0};
+
+    while (!q.empty()) {
+        auto [y, x] = q.front();
+        q.pop();
+
+        for (int d = 0; d < dy.size(); d++) {
+            int ty = y + dy[d];
+            int tx = x + dx[d];
+
+            if (0 <= ty && ty < a && 0 <= tx && tx < b &&
+                v[ty][tx] != '#' && dist[ty][tx] > dist[y][x] + 1) {
+                dist[ty][tx] = dist[y][x] + 1;
+                q.push({ty, tx});
+            }
+        }
+    }
+
+    return dist[fy][fx];
+}
+
+int main() {
+    int a, b, c, sy, sx, fy, fx; // h w
+    cin >> a >> b;
+
+    vector<string> v(a);
+
+    for(int i = 0; i < a; i++) {
+        cin >> v[i];
+    }
+
+    sy = 0;
+    sx = 0;
+    fy = a - 1;
+    fx = b - 1;
+    c = BFS(v, sy, sx, fy, fx);
+
+    if (c != INF) {
+        cout << c;
+    } else {
+        cout << -1;
+    }
+}
