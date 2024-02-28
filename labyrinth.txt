@@ -1,6 +1,6 @@
 Задача G: Лабиринт
 
-Вам дана матрица n×m из «.» и «#». Найдите длину кратчайшего пути от клетки (1,1)(1,1) до клеткb (n,m),
+Вам дана матрица n×m из «.» и «#». Найдите длину кратчайшего пути от клетки (1,1)(1,1) до клетки (n,m),
 если запрещено ходить по клетка, где стоит «#».
 
 Формат входных данных
@@ -27,54 +27,77 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int INF = 1e9;
-int BFS(vector<string> &v, int sy, int sx, int fy, int fx) {
-    int a = v.size(), b = v[0].size();
+int BFS(vector<string> &v, int sy, int sx, int fy, int fx, int a, int b, int INF) {
+    // создаем матрицу минимальных дистанций до каждого элемента и выводим то,
+    // которое в финишной клетке
 
+    // высота и ширина карты, вектор расстояний и BFSная очередь
+    int x, y, xx, yy;
+    pair<int, int> qq;
     vector<vector<int>> dist(a, vector<int>(b, INF));
-    queue<pair<int, int>> q;
 
+    queue<pair<int, int>> q;
     dist[sy][sx] = 0;
     q.push({sy, sx});
 
+    // вспомогательные векторы, чтобы ifы на четыре стороны света
+    // заменить одним циклом
     vector<int> dy = {-1, 0, 1, 0};
-    vector<int> dx = {-1, 0, 1, 0};
+    vector<int> dx = {0, 1, 0, -1};
 
+    // забираем с вершины очереди ячейку и пытаемся улучшить дистанцию
+    // до всех ее 4 соседей. Не вываливаемся за границы и смотрим стены
     while (!q.empty()) {
-        auto [y, x] = q.front();
+        qq = q.front();
+        y = qq.first;
+        x = qq.second;
         q.pop();
 
-        for (int d = 0; d < dy.size(); d++) {
-            int ty = y + dy[d];
-            int tx = x + dx[d];
+        for (int k = 0; k < 4; k++) {
+            yy = y + dy[k];
+            xx = x + dx[k];
 
-            if (0 <= ty && ty < a && 0 <= tx && tx < b &&
-                v[ty][tx] != '#' && dist[ty][tx] > dist[y][x] + 1) {
-                dist[ty][tx] = dist[y][x] + 1;
-                q.push({ty, tx});
+            if (0 <= yy && yy < a && 0 <= xx && xx < b
+                && v[yy][xx] != '#'
+                && dist[yy][xx] > dist[y][x] + 1) {
+                    dist[yy][xx] = dist[y][x] + 1;
+                    q.push({yy, xx});
             }
         }
     }
 
+    /*
+    for (int i = 0; i < a; i++){
+        for (int j = 0; j < b; j++) {
+            cout << dist[i][j] << ' ';
+        }
+        cout << '\n';
+    }
+    */
+
+    // в этой задаче надо расстояние до финиша в правом-нижнем углу вывести
     return dist[fy][fx];
 }
 
 int main() {
     int a, b, c, sy, sx, fy, fx; // h w
+    const int INF = 1e9;
+
+    // загрузим карту
     cin >> a >> b;
-
     vector<string> v(a);
-
     for(int i = 0; i < a; i++) {
         cin >> v[i];
     }
 
+    // задаем старт и финиш, запускаем BFS
     sy = 0;
     sx = 0;
     fy = a - 1;
     fx = b - 1;
-    c = BFS(v, sy, sx, fy, fx);
+    c = BFS(v, sy, sx, fy, fx, a, b, INF);
 
+    // вывод
     if (c != INF) {
         cout << c;
     } else {
