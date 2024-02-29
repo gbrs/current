@@ -22,7 +22,29 @@
 Результат работы
 12
 
+5 7
+...#...
+#.##.#.
+.....#.
+.####..
+.#.....
+14
 
+5 7
+...#...
+#.##.#.
+.#...#.
+.####..
+.......
+-1
+
+5 7
+...#...
+#.##.#.
+..#..#.
+.#...##
+...#...
+14
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -80,13 +102,13 @@ int BFS(vector<string> &v, int sy, int sx, int fy, int fx, int a, int b, int INF
 }
 
 int main() {
-    int a, b, c, sy, sx, fy, fx; // h w
+    int a, b, c, sy, sx, fy, fx;
     const int INF = 1e9;
 
     // загрузим карту
     cin >> a >> b;
     vector<string> v(a);
-    for(int i = 0; i < a; i++) {
+    for (int i = 0; i < a; i++) {
         cin >> v[i];
     }
 
