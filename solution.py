@@ -1,7 +1,4 @@
-from functools import reduce
-
-lst = [[1, 2, 3], [4, 5], [], [6, 7, 8]]
-print(reduce(lambda cnt, x: cnt + len(x), lst, 0))
+print(sorted(list('ЕЁЖеёж')))
 
 '''
 --------------------------------
@@ -18,7 +15,10 @@ print(reduce(lambda cnt, x: cnt + len(x), lst, 0))
 
 --------------------------------
 
+from functools import reduce
 
+lst = [[1, 2, 3], [4, 5], [], [6, 7, 8]]
+print(reduce(lambda cnt, x: cnt + len(x), lst, 0))
 
 --------------------------------
 
