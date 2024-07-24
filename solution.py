@@ -1,14 +1,8 @@
-x = int(input('Введите число: '))
-lst = [0] * 10
-n = 10
-while n > 0:
-    for i in range(10 - n, 10):
-        lst[i] += x
-    n -= 1
-print(f'Таблица умножения для числа {x}:')
-[print(f'{x} * {i + 1} = {lst[i]}') for i in range(10)]
+from itertools import permutations
 
+cmb = list(permutations(range(1, 7), 3))
 
+print(len(cmb))
 
 
 '''
@@ -22,7 +16,15 @@ print(f'Таблица умножения для числа {x}:')
 
 --------------------------------
 
-
+x = int(input('Введите число: '))
+lst = [0] * 10
+n = 10
+while n > 0:
+    for i in range(10 - n, 10):
+        lst[i] += x
+    n -= 1
+print(f'Таблица умножения для числа {x}:')
+[print(f'{x} * {i + 1} = {lst[i]}') for i in range(10)]
 
 --------------------------------
 
