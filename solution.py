@@ -1,9 +1,8 @@
-from itertools import permutations
+lst = [[j for j in range(10*i, 10*i + 10)] for i in range(10)]
 
-cmb = list(permutations(range(1, 7), 3))
+lst2 = lst[1:9][4:6]
 
-print(len(cmb))
-
+[print(*i) for i in lst2]
 
 '''
 --------------------------------
@@ -13,6 +12,34 @@ print(len(cmb))
 --------------------------------
 
 
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+from random import choices
+import math
+
+cnt = 0
+N = 1000000
+for _ in range(N):
+    lst = choices([1, 2, 3], [0.5, 0.3, 0.2], k=6)
+    if lst.count(3) == 1 and lst.count(2) == 2:
+        cnt += 1
+
+print(cnt / N)  # 0.134852
+
+--------------------------------
+
+from itertools import permutations
+cmb = list(permutations(range(1, 7), 3))
+print(len(cmb))
 
 --------------------------------
 
