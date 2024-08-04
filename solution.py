@@ -1,9 +1,3 @@
-lst = [[j for j in range(10*i, 10*i + 10)] for i in range(10)]
-
-lst2 = lst[1:9][4:6]
-
-[print(*i) for i in lst2]
-
 '''
 --------------------------------
 
@@ -19,7 +13,11 @@ lst2 = lst[1:9][4:6]
 
 --------------------------------
 
+lst = [[j for j in range(10*i, 10*i + 10)] for i in range(10)]
 
+lst2 = lst[1:9][4:6]
+
+[print(*i) for i in lst2]
 
 --------------------------------
 
