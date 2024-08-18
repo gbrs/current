@@ -1,3 +1,4 @@
+
 '''
 --------------------------------
 
@@ -9,7 +10,12 @@
 
 --------------------------------
 
+from collections import namedtuple
 
+Car = namedtuple('Car', 'color, speed')
+my_car = Car('red', 200)
+
+print(my_car.color, my_car.speed)
 
 --------------------------------
 
