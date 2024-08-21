@@ -1,3 +1,16 @@
+from random import sample
+
+m1 = [0, 0, 0, 1, 1, 1, 1, 1]
+m2 = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+
+N = 10000
+cnt = 0
+
+for _ in range(N):
+    if sum(sample(m1, 2)) + sum(sample(m2, 4)) == 3:
+        cnt += 1
+
+print(cnt / N)
 
 '''
 --------------------------------
