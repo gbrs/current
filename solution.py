@@ -1,3 +1,13 @@
+anton_courses = {
+    'SimulatorAnalyst': 56,
+    'StartML': 87,
+    'DataAnalyst': 140
+}
+anton_courses['HardML'] = 120
+courses = list(anton_courses.keys())
+StartML = anton_courses['StartML']
+
+print(courses)
 
 '''
 --------------------------------
@@ -7,6 +17,25 @@
 --------------------------------
 
 
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+
+
+--------------------------------
+
+list = [1, 2]
+dct = {x: x**2 for x in range(10)}
+lst = list(dct.keys())
+print(lst)
 
 --------------------------------
 
