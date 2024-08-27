@@ -1,13 +1,14 @@
-anton_courses = {
-    'SimulatorAnalyst': 56,
-    'StartML': 87,
-    'DataAnalyst': 140
-}
-anton_courses['HardML'] = 120
-courses = list(anton_courses.keys())
-StartML = anton_courses['StartML']
+dict_age = {111: 8, 222: 12, 333: 5}
 
-print(courses)
+a = set(dict_age.values())
+if len(a) == 3:
+    a = sorted(dict_age.items(), key=lambda x: x[1])
+    result = a[1][0]
+else:
+    result = ''
+print(result)
+print(dict_age.values())
+
 
 '''
 --------------------------------
@@ -24,11 +25,29 @@ print(courses)
 
 --------------------------------
 
+dict_age = {111: 8, 222: 12, 333: 5}
 
+a = set(dict_age.values())
+if len(a) == 3:
+    a = sorted(dict_age.items(), key=lambda x: x[1])
+    result = a[1][0]
+else:
+    result = ''
+print(result)
+print(dict_age.values())
 
 --------------------------------
 
+anton_courses = {
+    'SimulatorAnalyst': 56,
+    'StartML': 87,
+    'DataAnalyst': 140
+}
+anton_courses['HardML'] = 120
+courses = list(anton_courses.keys())
+StartML = anton_courses['StartML']
 
+print(courses)
 
 --------------------------------
 
