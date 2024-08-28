@@ -1,13 +1,3 @@
-dict_age = {111: 8, 222: 12, 333: 5}
-
-a = set(dict_age.values())
-if len(a) == 3:
-    a = sorted(dict_age.items(), key=lambda x: x[1])
-    result = a[1][0]
-else:
-    result = ''
-print(result)
-print(dict_age.values())
 
 
 '''
@@ -22,6 +12,30 @@ print(dict_age.values())
 --------------------------------
 
 
+
+--------------------------------
+
+
+
+--------------------------------
+
+import os
+
+for root, dirs, files in os.walk(r'.'):
+    print(root, dirs, files)
+
+--------------------------------
+
+from password import a, b
+
+print(a)
+print(b)
+
+--------------------------------
+
+from password import my_app
+
+print(my_app['server'])
 
 --------------------------------
 
