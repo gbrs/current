@@ -1,13 +1,4 @@
-def foo(k):
-    return k**4 + k**2 + 1
 
-
-ans = 0
-
-for i in range(1, 2025):
-    ans += 2 * i / foo(i)
-
-print(ans)
 
 '''
 --------------------------------
@@ -20,7 +11,14 @@ print(ans)
 
 --------------------------------
 
+cnt = 0
+for i in range(403):
+    for j in range(403):
+        for k in range(403):
+            if i + j + k == 402:
+                cnt += 1
 
+print(cnt)
 
 --------------------------------
 
