@@ -1,0 +1,95 @@
+
+#include <iostream> 
+#include <vector> 
+#include <set> 
+#include <algorithm> 
+
+
+int main() { 
+    std::ios::sync_with_stdio(0); 
+    std::cin.tie(0); 
+    long long w, h, n, m, k, n_ur, m_ur, a, flag = 0; 
+    std::cin >> w >> h >> n >> m >> k; 
+    n += 1; 
+    m += 1; 
+    std::vector<long long> nn(n), mm(m); 
+    std::multiset<long long> grafstva; 
+    if (n != 1) { 
+        n_ur = 0; 
+        for (int i = 0; i < n - 1; i++) { 
+            std::cin >> nn[i]; 
+            a = nn[i]; 
+            nn[i] -= n_ur; 
+            n_ur = a; 
+        } 
+        nn[n - 1] = w - n_ur; 
+    } else { 
+        nn[0] = w; 
+    } 
+    if (m != 1) { 
+        m_ur = 0; 
+        for (int i = 0; i < m - 1; i++) { 
+            std::cin >> mm[i]; 
+            a = mm[i]; 
+            mm[i] -= m_ur; 
+            m_ur = a; 
+        } 
+        mm[m - 1] = h - m_ur; 
+    } else { 
+        mm[0] = h; 
+    } 
+    sort(nn.rbegin(), nn.rend()); 
+    sort(mm.rbegin(), mm.rend()); 
+    // std::cout << std::min(k / m + 1, n) << ' ' << std::min(k / n + 1, m) << '\n';
+    for (int i = 0; i < std::min(k / m + 1, n); i++) { 
+        for (int j = 0; j < std::min(k / n + 1, m); j++) { 
+            if (i * std::min(k / n + 1, m) + j < k) {
+                // std::cout << "+ ";
+                grafstva.insert(nn[i] * mm[j]); 
+            } else { 
+                if (nn[i] * mm[j] > *grafstva.begin()) { 
+                    // std::cout << " -+";
+                    // std::cout << *grafstva.begin() << " "; 
+                    grafstva.extract(*grafstva.begin()); 
+                    grafstva.insert(nn[i] * mm[j]); 
+                    // std::cout << nn[i] * mm[j] << " "; 
+                }
+            } 
+        } 
+    } 
+    
+    // std::cout << '\n';
+    
+    for (int i = 0; i < std::min(k / m + 1, n); i++) { 
+        for (int j = std::min(k / n + 1, m); j < m; j++) { 
+            if (nn[i] * mm[j] > *grafstva.begin()) { 
+                grafstva.extract(*grafstva.begin()); 
+                grafstva.insert(nn[i] * mm[j]); 
+            } else { 
+                break; 
+            } 
+        } 
+    } 
+    
+    for (int i = std::min(k / m + 1, n); i < n; i++) { 
+        for (int j = 0; j < m; j++) { 
+            if (nn[i] * mm[j] > *grafstva.begin()) { 
+                // std::cout << *grafstva.begin() << " "; 
+                grafstva.extract(*grafstva.begin()); 
+                grafstva.insert(nn[i] * mm[j]); 
+                // std::cout << nn[i] * mm[j] << " "; 
+            } else { 
+                if (j == 0) { 
+                    flag = 1; 
+                } 
+                break; 
+            } 
+        } 
+        if (flag == 1) { 
+            break; 
+        } 
+    } 
+    
+    std::cout << '\n'; 
+    std::cout << *grafstva.begin() << " " << *grafstva.rbegin(); 
+}
