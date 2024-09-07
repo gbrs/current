@@ -1,3 +1,179 @@
+
+-- увеличенный массив + сортировка + елочка
+
+#include <iostream>
+#include <vector>
+#include <set>
+#include <algorithm>
+
+
+int main() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    long long w, h, n, m, k, kkk, n_ur, m_ur, a, start_col, len, flag = 0, kk = 0;
+    std::cin >> w >> h >> n >> m >> k;
+    n += 1;
+    m += 1;
+    kkk = k + 600000;
+    std::vector<long long> nn(n), mm(m), grafstva(kkk);
+    if (n != 1) {
+        n_ur = 0;
+        for (int i = 0; i < n - 1; i++) {
+            std::cin >> nn[i];
+            a = nn[i];
+            nn[i] -= n_ur;
+            n_ur = a;
+        }
+        nn[n - 1] = w - n_ur;
+    } else {
+        nn[0] = w;
+    }
+    if (m != 1) {
+        m_ur = 0;
+        for (int i = 0; i < m - 1; i++) {
+            std::cin >> mm[i];
+            a = mm[i];
+            mm[i] -= m_ur;
+            m_ur = a;
+        }
+        mm[m - 1] = h - m_ur;
+    } else {
+        mm[0] = h;
+    }
+    sort(nn.rbegin(), nn.rend());
+    sort(mm.rbegin(), mm.rend());
+
+    for (int diag = 0; diag < std::min(m, n); diag++) {
+        for (int i = diag; i < n; i++) {
+            if (flag == 0 && kk < kkk) {
+                grafstva[kk] = nn[i] * mm[diag];
+                kk++;
+                if (kk == kkk) {
+                    sort(grafstva.rbegin(), grafstva.rend());
+                    flag = 1;
+                    kk = k;
+                }
+            } else {
+                if (kk < kkk) {
+                    a = nn[i] * mm[diag];
+                    if (a > grafstva[k - 1]) {
+                        grafstva[kk] = a;
+                        kk++;
+                    }
+                    if (kk == kkk) {
+                        sort(grafstva.rbegin(), grafstva.rend());
+                        kk = k;
+                    }
+                }
+            }
+        }
+        for (int j = diag + 1; j < m; j++) {
+            if (flag == 0 && kk < kkk) {
+                grafstva[kk] = nn[diag] * mm[j];
+                kk++;
+                if (kk == kkk) {
+                    sort(grafstva.rbegin(), grafstva.rend());
+                    flag = 1;
+                    kk = k;
+                }
+            } else {
+                if (kk < kkk) {
+                    a = nn[diag] * mm[j];
+                    if (a > grafstva[k - 1]) {
+                        grafstva[kk] = a;
+                        kk++;
+                    }
+                    if (kk == kkk) {
+                        sort(grafstva.rbegin(), grafstva.rend());
+                        kk = k;
+                    }
+                }
+            }
+        }
+    }
+    sort(grafstva.rend() - kk, grafstva.rend());
+    std::cout << grafstva[k - 1] << " " << grafstva[0];
+}
+
+
+-- увеличенный массив + сортировка
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+
+int main() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    long long w, h, n, m, k, kk, kkk, flag, n_ur, m_ur, a;
+    std::cin >> w >> h >> n >> m >> k;
+    n += 1;
+    m += 1;
+    kkk = k + 900000;
+    std::vector<long long> nn(n), mm(m), grafstva(kkk);
+    if (n != 1) {
+        n_ur = 0;
+        for (int i = 0; i < n - 1; i++) {
+            std::cin >> nn[i];
+            a = nn[i];
+            nn[i] -= n_ur;
+            n_ur = a;
+        }
+        nn[n - 1] = w - n_ur;
+    } else {
+        nn[0] = w;
+    }
+    if (m != 1) {
+        m_ur = 0;
+        for (int i = 0; i < m - 1; i++) {
+            std::cin >> mm[i];
+            a = mm[i];
+            mm[i] -= m_ur;
+            m_ur = a;
+        }
+        mm[m - 1] = h - m_ur;
+    } else {
+        mm[0] = h;
+    }
+
+    sort(nn.rbegin(), nn.rend());
+    sort(mm.rbegin(), mm.rend());
+
+    kk = 0;
+    flag = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (flag == 0 && kk < kkk) {
+                grafstva[kk] = nn[i] * mm[j];
+                kk++;
+                if (kk == kkk) {
+                    sort(grafstva.rbegin(), grafstva.rend());
+                    flag = 1;
+                    kk = k;
+                }
+            } else {
+                if (kk < kkk) {
+                    a = nn[i] * mm[j];
+                    if (a > grafstva[k - 1]) {
+                        grafstva[kk] = a;
+                        kk++;
+                    }
+                    if (kk == kkk) {
+                        sort(grafstva.rbegin(), grafstva.rend());
+                        kk = k;
+                    }
+                }
+            }
+
+
+        }
+    }
+    sort(grafstva.rend() - kk, grafstva.rend());
+    std::cout << grafstva[k - 1] << " " << grafstva[0];
+}
+
+
 -- проход елочкой
 
 #include <iostream>
