@@ -1,3 +1,41 @@
+-- генерация сочетаний
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void Abn(int sm, std::vector<int> &Liste, int v, int &a) {
+    std::cout << sm << ' ' << a << '\n';
+    int SM;
+    if (sm == 0) {
+        a += 1;
+        return;
+    }
+
+    if (sm < 0) {
+        return;
+    }
+    for (int i = 0; i < v; i++) {
+        // SM = sm - Liste[i];
+        Abn(sm - Liste[i], Liste, i + 1, a);
+        // SM = sm;
+    }
+}
+
+int main() {
+    int V, N, a;
+    a = 0;
+    std::cin >> V >> N;
+    std::vector<int> Liste(V);
+    for (int i = 0; i < V; i++) {
+        std::cin >> Liste[i];
+    }
+    std::sort(Liste.begin(), Liste.end());
+    Abn(N, Liste, V, a);
+    std::cout << a;
+}
+
+
+
 ###
 vector v(5, vector(5,  vector(5, 1)));
 -- с C++17 можно не писать <int>
