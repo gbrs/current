@@ -1,7 +1,8 @@
-a = (1, 'r', [2, 7])
-dct = {a: 5}
-# TypeError: unhashable type: 'list'
-print(dct[(1, 'r', [2, 7])])
+
+
+
+
+
 
 '''
 --------------------------------
@@ -10,7 +11,25 @@ print(dct[(1, 'r', [2, 7])])
 
 --------------------------------
 
+class Transport:
+    # def __init__(self, d, p):
+    #     self._power = p
+    #     self.dimensions = d
+    _power = 0
+    dimensions = (0, 0, 0)
 
+
+class Auto(Transport):
+    # def __init__(self, d, p):
+    #     super().__init__(d, p)
+    pass
+
+
+audi = Auto()
+
+print(audi._power)
+print(Auto._power)
+print(getattr(Transport, '_power'))
 
 --------------------------------
 
