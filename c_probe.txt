@@ -605,3 +605,190 @@ int main() {
     std::cout << '\n'; 
     std::cout << *grafstva.begin() << " " << *grafstva.rbegin(); 
 }
+
+
+-- дерево отрезков сумма на разностном массиве
+-- ошибка выполнения на задаче 5
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+std::vector<int> v(10000), raznost(100000), tree(400000, 0);
+
+void build(int a, int tl, int tr) {
+    if (tl == tr) {
+        tree[a] = raznost[tl];
+    } else {
+        int tm = (tl + tr) / 2;
+        build(a * 2, tl, tm);
+        build(a * 2 + 1, tm + 1, tr);
+        tree[a] = tree[a * 2] + tree[a * 2 + 1];
+    }
+}
+
+void update(int l, int r, int c, int tl, int tr) {
+    raznost[l - 1] += c;
+    raznost[r] -= c;
+    build(1, tl, tr);  // грубо перестраиваю все дерево, а не только то, что надо
+    /*
+    if (tl == tr) {
+        if (tl == l) {
+            tree[l] += c;
+        } else {
+            if (tr == r + 1) {
+                tree[r + 1] -= c;
+            }
+        }
+    } else {
+        int tm = (tl + tr) / 2;
+        update(a * 2, tl, tm);
+        update(a * 2 + 1, tm + 1, tr);
+        tree[a] = tree[a * 2] + tree[a * 2 + 1];
+    }
+    */
+}
+
+int summ(int a, int tl, int tr, int l, int r) {
+    if (r < tl || l > tr)
+        return 0;
+    if (l <= tl && tr <= r)
+        return tree[a];
+    int tm = (tl + tr) / 2;
+    return summ(a * 2, tl, tm, l, r) + summ(a * 2 + 1, tm + 1, tr, l, r);
+}
+
+int main() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    int n, k, a, b, c, otv;
+    char t;
+    std::cin >> n;
+    for (int i = 0; i < n; i++) {
+        std::cin >> v[i];
+    }
+    for (int i = 0; i < n; i++) {
+        raznost[i] = v[i];
+    }
+    // создаем разностный массив
+    raznost[0] = v[0];
+    for (int i = 1; i < n; i++) {
+        raznost[i] = v[i] - v[i - 1];
+    }
+    /*
+    for (int i = 0; i < 5; i++) {
+        std::cout << raznost[i] << " ";
+    }
+    std::cout << '\n';
+    */
+    build(1, 0, n - 1);
+    // выполняем запросы
+    std::cin >> k;
+    for (int i = 0; i < k; i++) {
+        std::cin >> t;
+        if (t == 'g') {
+            std::cin >> b;
+            otv = summ(1, 0, n - 1, 1 - 1, b - 1); // сумма от первого элемента до i-го и есть искомое
+            std::cout << otv << '\n';
+        } else {
+            std::cin >> a >> b >> c;
+            update(a, b, c, 0, n - 1);
+        }
+    }
+/*
+    for (int i = 0; i < n; i++) {
+        std::cout << raznost[i] << " ";
+    }
+    std::cout << '\n';
+    for (int i = 0; i < n * 4; i++) {
+        std::cout << tree[i] << " ";
+    }
+*/
+/*
+5
+7 3 1 6 4
+5
+g 5
+g 4
+g 3
+a 2 4 4
+g 4
+
+4
+6
+1
+10
+*/
+}
+
+
+-- Знакопеременная сумма на отрезке
+-- ошибка выполнения на 9-м
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+std::vector<int> v(10000), tree(400000, 0);
+
+void build(int a, int tl, int tr) {
+    if (tl == tr) {
+        tree[a] = v[tl];
+    } else {
+        int tm = (tl + tr) / 2;
+        build(a * 2, tl, tm);
+        build(a * 2 + 1, tm + 1, tr);
+        tree[a] = tree[a * 2] + tree[a * 2 + 1];
+    }
+}
+
+void update(int a, int b, int tl, int tr) {
+    v[a] = b;
+    build(1, tl, tr);
+}
+
+int summ(int a, int tl, int tr, int l, int r) {
+    if (r < tl || l > tr)
+        return 0;
+    if (l <= tl && tr <= r)
+        return tree[a];
+    int tm = (tl + tr) / 2;
+    return summ(a * 2, tl, tm, l, r) + summ(a * 2 + 1, tm + 1, tr, l, r);
+}
+
+int main() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    int n, k, a, b, c, otv;
+    std::cin >> n;
+    for (int i = 0; i < n; i++) {
+        if (i % 2 == 0) {
+            std::cin >> v[i];
+        } else {
+            std::cin >> c;
+            v[i] = -1 * c;
+        }
+    }
+    build(1, 0, n - 1);
+    // выполняем запросы
+    std::cin >> k;
+    for (int i = 0; i < k; i++) {
+        std::cin >> c;
+        if (c == 1) {
+            std::cin >> a >> b;
+            otv = summ(1, 0, n - 1, a - 1, b - 1);
+            if (a % 2 == 1) {
+                std::cout << otv << '\n';
+            } else {
+                std::cout << -1 * otv << '\n';
+            }
+        } else {
+            std::cin >> a >> b;
+            if (a % 2 == 1) {
+                update(a - 1, b, 0, n - 1);
+            } else {
+                update(a - 1, -1 * b, 0, n - 1);
+            }
+        }
+    }
+}
+
+
