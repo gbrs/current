@@ -880,3 +880,137 @@ int main() {
         }
     }
 }
+
+
+
+-- Количество путей между компонентами сильной связности
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+void TopSort(int x, std::vector<int>& color, std::vector<std::vector<int>>& smezh,
+         int rod, std::vector<int>& topsort) {
+    color[x] = -1;
+    for (int i = 0; i < smezh[x].size(); i++) {
+        if (color[smezh[x][i]] == 0) {
+            TopSort(smezh[x][i], color, smezh, x, topsort);
+        }
+    }
+    topsort.push_back(x);
+}
+
+void DFS(int x, std::vector<int>& topsort, std::vector<std::vector<int>>& smezh,
+         int a, std::vector<int>& color, std::vector<int>& used) {
+    used[x] = -1;
+    color[x] = a;
+    // std::cout << "x " << x + 1 << ' ' << a << '\n';
+    for (int i = 0; i < smezh[x].size(); i++) {
+        if (used[smezh[x][i]] != -1) {
+            DFS(smezh[x][i], topsort, smezh, a, color, used);
+            // std::cout << 1;
+        }
+    }
+}
+
+int main() {
+    int n, m, a, b;
+    std::cin >> n >> m;
+    std::vector<std::vector<int>> v(m, std::vector<int>(2)), smezh(n), antismezh(n);  // ребра, топсорт
+    std::vector<int> color(n), topsort, used(n);  // посещенные вершины, ответ
+
+    // вводим данные
+    for (int i = 0; i < m; i++) {
+        std::cin >> a >> b;
+        v[i][0] = a - 1;
+        v[i][1] = b - 1;
+    }
+
+    // создаем списки смежности для прямого и обратного графа
+    for (int i = 0; i < m; i++) {
+        smezh[v[i][0]].push_back(v[i][1]);
+        antismezh[v[i][1]].push_back(v[i][0]);
+    }
+
+    // "топсорт" для обратного графа
+    for (int i = 0; i < n; i++) {
+        if (color[i] == 0) {
+            TopSort(i, color, antismezh, n, topsort);
+        }
+    }
+    std::reverse(topsort.begin(), topsort.end());
+    /*
+    std::cout << "topsort ";
+    for (auto i: topsort) {
+        std::cout << i + 1 << ' ';
+    }
+    std::cout << '\n';
+    */
+
+    // покраска ксс
+    a = 0;
+    for (int i = 0; i < n; i++) {
+        if(used[topsort[i]] != -1) {
+            DFS(topsort[i], topsort, smezh, a, color, used);
+            // std::cout << '\n';
+            a += 1;
+        }
+    }
+    /*
+    std::cout << "color ";
+    for (auto i: u) {
+        std::cout << i << ' ';
+    }
+    std::cout << '\n';
+    */
+
+    a = 0;
+    for (int i = 0; i < m; i++) {
+        if (color[v[i][0]] != color[v[i][1]]) {
+            // std::cout << v[i][0] + 1 << ' ' << v[i][1] + 1 << '\n';
+            a += 1;
+        }
+    }
+    std::cout << a;
+}
+
+/*
+
+? 0
+4 5
+1 2
+2 3
+3 1
+2 4
+3 4
+
+2 треугольника несвязных 0
+6 6
+1 2
+2 3
+3 1
+4 5
+5 6
+6 4
+
+треугольник и отдельная 1
+4 4
+1 2
+2 3
+3 1
+2 4
+
+бамбук 2
+3 2
+1 2
+2 3
+
+цикл 0
+3 3
+1 2
+2 3
+3 1
+
+точки 0
+90 0
+*/
+
