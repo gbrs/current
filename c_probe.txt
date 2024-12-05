@@ -1016,11 +1016,13 @@ int main() {
 
 
 -- Дерево отрезков с массовыми операциями
+// перед каждым шагом вниз проталкиваем несогласованности вниз
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
-int n;
+int n, a, b, c;
 vector <int> input(8);  // вектор исходных данных
 vector <int> tree(40);  // дерево отрезков
 vector <int> shift(40);  // вектор несогласованных модификаций
@@ -1029,6 +1031,7 @@ vector <int> shift(40);  // вектор несогласованных моди
 void build_tree(int vertex, int tl, int tr) {
     /* строим изначальное дерево */
     if (tl == tr) {
+        // листья
         tree[vertex] = input[tl];
     } else {
         int tm = (tl + tr) / 2;
@@ -1041,66 +1044,72 @@ void build_tree(int vertex, int tl, int tr) {
 
 void push(int vertex, int tl, int tr) {
     /* проталкиваем несогласованные модификации вниз */
-    if (shift[vertex] != 0 && vertex * 2 + 1 < 400004) {    //если есть что и куда проталкивать
 
-        // вниз проталкиваем несогласованность
+    if (shift[vertex] != 0 && vertex * 2 + 1 < 4 * n + 7) {  // если есть что и куда проталкивать
+
+        // вниз проталкиваем несогласованность - в детей, обнуляем в родителе
         shift[vertex * 2] = shift[vertex];
         shift[vertex * 2 + 1] = shift[vertex];
         shift[vertex] = 0;
 
-        // пересчет значений в tree
+        // пересчитываем в детях значения tree
         int tm = (tl + tr) / 2;
-        tree[vertex * 2] = (tm - tl + 1) * shift[vertex * 2];
-        tree[vertex * 2 + 1] = (tr - tm) * shift[vertex * 2 + 1];
+        tree[vertex * 2] += (tm - tl + 1) * shift[vertex * 2];
+        tree[vertex * 2 + 1] += (tr - tm) * shift[vertex * 2 + 1];
     }
 }
 
 
 int get_sum(int l, int r, int vertex, int tl, int tr) {
     /* получаем сумму на отрезке */
-    //вариант 1
+
+    // поддерево внутри интервала модификации
     if (l <= tl && tr <= r) {
         return tree[vertex];
     }
 
-    //вариант 2
+    // поддерево вне интервала
     if (tr < l || r < tl) {
         return 0;
     }
 
-    //вариант 3
-    push(vertex, tl, tr);    //Проталкиваем модификации перед каждым разделением запроса!
+    // поддерево пересекается с интервалом частично
+    push(vertex, tl, tr);    // перед каждым шагом вниз проталкиваем несогласованности вниз
     int tm = (tl + tr) / 2;
-    return get_sum(l, r, vertex * 2,     tl,     tm)
-         + get_sum(l, r, vertex * 2 + 1, tm + 1, tr);
+    return get_sum(l, r, vertex * 2, tl, tm) + get_sum(l, r, vertex * 2 + 1, tm + 1, tr);
 }
 
 
-void assign(int l, int r, int val, int vertex, int tl, int tr) {
+void add(int l, int r, int val, int vertex, int tl, int tr) {
     /* update на отрезке */
-    //вариант 1
+
+    // поддерево внутри интервала модификации. Изменяем сумму и запоминаем несогласованность
     if (l <= tl && tr <= r) {
-        tree[vertex] = val * (tr - tl + 1);
-        shift[vertex] = val;   //сохраняем несогласованность
+        tree[vertex] = tree[vertex] + val * (tr - tl + 1);
+        shift[vertex] += val;
         return;
     }
 
-    //вариант 2
+    // поддерево вне интервала. Ничего не делаем
     if (tr < l || r < tl) {
         return;
     }
 
-    //вариант 3
-    push(vertex, tl, tr);    // перед каждым шагом вниз проталкиваем несогласованности вниз
+    // поддерево пересекается с интервалом частично.
+    // перед каждым шагом вниз проталкиваем несогласованности вниз
+    push(vertex, tl, tr);
+    // шагаем в левого сына, потом в правого
     int tm = (tl + tr) / 2;
-    assign(l, r, val, vertex * 2,     tl,     tm);
-    assign(l, r, val, vertex * 2 + 1, tm + 1, tr);
+    add(l, r, val, vertex * 2,     tl,     tm);
+    add(l, r, val, vertex * 2 + 1, tm + 1, tr);
+    // считаем значение в вершине после того, как сыновей отработали
     tree[vertex] = tree[vertex * 2] + tree[vertex * 2 + 1];
 }
 
 
 void print(vector <int> & vec) {
-    /* вспомогательная печать */
+    /* печать массивов для дебага */
+
     for (auto i: vec) {
         cout << i << ' ';
     }
@@ -1117,11 +1126,23 @@ int main() {
     build_tree(1, 0, n - 1);
     print(tree);
 
-    cout << get_sum(1 - 1, 8 - 1, 1, 0, n - 1) << '\n';
-    assign(1 - 1, 8 - 1, 10, 1, 0, n - 1);
+    a = 1;
+    b = 8;
+    cout << get_sum(a - 1, b - 1, 1, 0, n - 1) << '\n';
+    a = 3;
+    b = 5;
+    c = 10;
+    add(a - 1, b - 1, c, 1, 0, n - 1);
     print(tree);
-    cout << get_sum(1 - 1, 8 - 1, 1, 0, n - 1);
-
-    //Можно делать запросы вида get_sum(l, r, 1, 0, n - 1) и assign(l, r, val, 1, 0, n - 1);
+    a = 1;
+    b = 8;
+    cout << get_sum(a - 1, b - 1, 1, 0, n - 1);
 }
+
+/*
+8
+1 2 3 4 5 6 7 8
+*/
+
+
 
