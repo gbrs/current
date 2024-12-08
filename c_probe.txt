@@ -1016,25 +1016,30 @@ int main() {
 
 
 -- Дерево отрезков с массовыми операциями
+-- добавление числа на отрезке и сумма на отрезке
+// не проходит тест 4
 // перед каждым шагом вниз проталкиваем несогласованности вниз
 
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-int n, a, b, c;
-vector <int> input(8);  // вектор исходных данных
-vector <int> tree(40);  // дерево отрезков
-vector <int> shift(40);  // вектор несогласованных модификаций
+const long long N = 150000 + 7;
+const long long NO_OPERATION = 0;
+vector <long long> input(N, NO_OPERATION);  // вектор исходных данных
+vector <long long> tree(4 * N, NO_OPERATION);  // дерево отрезков
+vector <long long> shift(4 * N, NO_OPERATION);  // вектор несогласованных модификаций
 
 
-void build_tree(int vertex, int tl, int tr) {
+void build_tree(long long vertex, long long tl, long long tr) {
     /* строим изначальное дерево */
+
     if (tl == tr) {
         // листья
         tree[vertex] = input[tl];
     } else {
-        int tm = (tl + tr) / 2;
+        long long tm = (tl + tr) / 2;
         build_tree(vertex * 2, tl, tm);
         build_tree(vertex * 2 + 1, tm + 1, tr);
         tree[vertex] = tree[vertex * 2] + tree[vertex * 2 + 1];
@@ -1042,25 +1047,25 @@ void build_tree(int vertex, int tl, int tr) {
 }
 
 
-void push(int vertex, int tl, int tr) {
+void push(long long vertex, long long tl, long long tr) {
     /* проталкиваем несогласованные модификации вниз */
 
-    if (shift[vertex] != 0 && vertex * 2 + 1 < 4 * n + 7) {  // если есть что и куда проталкивать
+    if (shift[vertex] != NO_OPERATION && vertex * 2 + 1 < 4 * N) {  // если есть что и куда проталкивать
 
         // вниз проталкиваем несогласованность - в детей, обнуляем в родителе
-        shift[vertex * 2] = shift[vertex];
-        shift[vertex * 2 + 1] = shift[vertex];
-        shift[vertex] = 0;
+        shift[vertex * 2] += shift[vertex];
+        shift[vertex * 2 + 1] += shift[vertex];
+        shift[vertex] = NO_OPERATION;
 
         // пересчитываем в детях значения tree
-        int tm = (tl + tr) / 2;
+        long long tm = (tl + tr) / 2;
         tree[vertex * 2] += (tm - tl + 1) * shift[vertex * 2];
         tree[vertex * 2 + 1] += (tr - tm) * shift[vertex * 2 + 1];
     }
 }
 
 
-int get_sum(int l, int r, int vertex, int tl, int tr) {
+long long get_sum(long long l, long long r, long long vertex, long long tl, long long tr) {
     /* получаем сумму на отрезке */
 
     // поддерево внутри интервала модификации
@@ -1075,17 +1080,17 @@ int get_sum(int l, int r, int vertex, int tl, int tr) {
 
     // поддерево пересекается с интервалом частично
     push(vertex, tl, tr);    // перед каждым шагом вниз проталкиваем несогласованности вниз
-    int tm = (tl + tr) / 2;
+    long long tm = (tl + tr) / 2;
     return get_sum(l, r, vertex * 2, tl, tm) + get_sum(l, r, vertex * 2 + 1, tm + 1, tr);
 }
 
 
-void add(int l, int r, int val, int vertex, int tl, int tr) {
+void add(long long l, long long r, long long val, long long vertex, long long tl, long long tr) {
     /* update на отрезке */
 
     // поддерево внутри интервала модификации. Изменяем сумму и запоминаем несогласованность
     if (l <= tl && tr <= r) {
-        tree[vertex] = tree[vertex] + val * (tr - tl + 1);
+        tree[vertex] += val * (tr - tl + 1);
         shift[vertex] += val;
         return;
     }
@@ -1099,7 +1104,7 @@ void add(int l, int r, int val, int vertex, int tl, int tr) {
     // перед каждым шагом вниз проталкиваем несогласованности вниз
     push(vertex, tl, tr);
     // шагаем в левого сына, потом в правого
-    int tm = (tl + tr) / 2;
+    long long tm = (tl + tr) / 2;
     add(l, r, val, vertex * 2,     tl,     tm);
     add(l, r, val, vertex * 2 + 1, tm + 1, tr);
     // считаем значение в вершине после того, как сыновей отработали
@@ -1107,7 +1112,7 @@ void add(int l, int r, int val, int vertex, int tl, int tr) {
 }
 
 
-void print(vector <int> & vec) {
+void print(vector <long long> & vec) {
     /* печать массивов для дебага */
 
     for (auto i: vec) {
@@ -1118,31 +1123,523 @@ void print(vector <int> & vec) {
 
 
 int main() {
-
+    // #define int long long
+    long long n, a, b, c, m;
+    string str;
     cin >> n;
     for (int i = 0; i < n; i++) {
         cin >> input[i];
     }
     build_tree(1, 0, n - 1);
-    print(tree);
-
-    a = 1;
-    b = 8;
-    cout << get_sum(a - 1, b - 1, 1, 0, n - 1) << '\n';
-    a = 3;
-    b = 5;
-    c = 10;
-    add(a - 1, b - 1, c, 1, 0, n - 1);
-    print(tree);
-    a = 1;
-    b = 8;
-    cout << get_sum(a - 1, b - 1, 1, 0, n - 1);
+    // print(tree);
+    // print(shift);
+    // cout << '\n';
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        cin >> str >> a >> b;
+        if (str == "add") {
+            cin >> c;
+            add(a - 1, b - 1, c, 1, 0, n - 1);
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        } else {
+            cout << get_sum(a - 1, b - 1, 1, 0, n - 1) << '\n';
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        }
+    }
 }
 
 /*
-8
-1 2 3 4 5 6 7 8
+10
+1 4 -6 5 2 -6 5 7 -1 1
+11
+add 1 4 -2
+add 2 4 -4
+sum 4 10
+sum 7 9
+add 6 10 -2
+sum 1 6
+add 1 9 -6
+add 7 8 0
+add 4 4 6
+add 1 3 5
+sum 1 10
 */
 
 
+
+-- Дерево отрезков с массовыми операциями вариант 2
+-- добавление числа на отрезке и сумма на отрезке
+// не проходит тест 4
+// а где мы шифты к дереву прибавляем?
+// перед каждым шагом вниз проталкиваем несогласованности вниз
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+const long long N = 150000 + 7;
+const long long NO_OPERATION = 0;
+vector <long long> input(N);  // вектор исходных данных
+vector <long long> tree(4 * N, NO_OPERATION);  // дерево отрезков
+vector <long long> shift(4 * N, NO_OPERATION);  // вектор несогласованных модификаций
+
+
+void build_tree(long long vertex, long long tl, long long tr) {
+    /* строим изначальное дерево */
+
+    if (tl == tr) {
+        // листья
+        tree[vertex] = input[tl];
+    } else {
+        long long tm = (tl + tr) / 2;
+        build_tree(vertex * 2, tl, tm);
+        build_tree(vertex * 2 + 1, tm + 1, tr);
+        tree[vertex] = tree[vertex * 2] + tree[vertex * 2 + 1];
+    }
+}
+
+
+void push(long long vertex, long long tl, long long tr) {
+    /* проталкиваем несогласованные модификации вниз */
+
+    if (shift[vertex] == NO_OPERATION) return;
+    tree[vertex] += shift[vertex] * (tr - tl + 1);
+    if (tr - tl != 1) {
+        shift[2 * vertex] += shift[vertex];
+        shift[2 * vertex + 1] += shift[vertex];
+        shift[vertex] = NO_OPERATION;
+    }
+}
+
+
+void add(long long l, long long r, long long val, long long vertex, long long tl, long long tr) {
+    /* update на отрезке */
+
+    push(vertex, tr, tl);
+
+    // поддерево внутри интервала модификации. Изменяем сумму и запоминаем несогласованность
+    if (l <= tl && tr <= r) {
+        shift[vertex] = val;
+        push(vertex, tr, tl);
+        return;
+    }
+
+    // поддерево вне интервала. Ничего не делаем
+    if (tr < l || r < tl) {
+        return;
+    }
+
+    // поддерево пересекается с интервалом частично.
+    long long tm = (tl + tr) / 2;
+    add(l, r, val, vertex * 2,     tl,     tm);
+    add(l, r, val, vertex * 2 + 1, tm + 1, tr);
+    // считаем значение в вершине после того, как сыновей отработали
+    tree[vertex] = tree[vertex * 2] + tree[vertex * 2 + 1];
+}
+
+
+long long get_sum(long long l, long long r, long long vertex, long long tl, long long tr) {
+    /* получаем сумму на отрезке */
+
+    push(vertex, tr, tl);
+
+    // поддерево внутри интервала модификации
+    if (l <= tl && tr <= r) {
+        return tree[vertex];
+    }
+
+    // поддерево вне интервала
+    if (tr < l || r < tl) {
+        return 0;
+    }
+
+    // поддерево пересекается с интервалом частично
+    long long tm = (tl + tr) / 2;
+    return get_sum(l, r, vertex * 2, tl, tm) + get_sum(l, r, vertex * 2 + 1, tm + 1, tr);
+}
+
+
+void print(vector <long long> & vec) {
+    /* печать массивов для дебага */
+
+    for (auto i: vec) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+}
+
+
+int main() {
+    // #define int long long
+    long long n, a, b, c, m;
+    string str;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> input[i];
+    }
+    build_tree(1, 0, n - 1);
+    // print(tree);
+    // print(shift);
+    // cout << '\n';
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        cin >> str >> a >> b;
+        if (str == "add") {
+            cin >> c;
+            add(a - 1, b - 1, c, 1, 0, n - 1);
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        } else {
+            cout << get_sum(a - 1, b - 1, 1, 0, n - 1) << '\n';
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        }
+    }
+}
+
+/*
+10
+1 4 -6 5 2 -6 5 7 -1 1
+10
+add 1 4 -2
+add 2 4 -4
+sum 4 10
+sum 7 9
+add 6 10 -2
+sum 1 6
+add 1 9 -6
+add 7 8 0
+add 4 4 6
+add 1 3 5
+*/
+
+
+-- Дерево отрезков с массовыми операциями
+-- присвоение на отрезке и минимум на отрезке
+// не проходит тест 4
+
+// перед каждым шагом вниз проталкиваем несогласованности вниз
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const long long N = 150000 + 7;
+const long long NO_OPERATION = 1e9 + 7;
+vector <long long> input(N, NO_OPERATION);  // вектор исходных данных
+vector <long long> tree(4 * N, NO_OPERATION);  // дерево отрезков
+vector <long long> shift(4 * N, NO_OPERATION);  // вектор несогласованных модификаций
+
+
+void build_tree(long long vertex, long long tl, long long tr) {
+    /* строим изначальное дерево */
+
+    if (tl == tr) {
+        // листья
+        tree[vertex] = input[tl];
+    } else {
+        long long tm = (tl + tr) / 2;
+        build_tree(vertex * 2, tl, tm);
+        build_tree(vertex * 2 + 1, tm + 1, tr);
+        tree[vertex] = min(tree[vertex * 2], tree[vertex * 2 + 1]);
+    }
+}
+
+
+void push(long long vertex, long long tl, long long tr) {
+    /* проталкиваем несогласованные модификации вниз */
+
+    if (shift[vertex] != NO_OPERATION && vertex * 2 + 1 < 4 * N) {  // если есть что и куда проталкивать
+
+        // вниз проталкиваем несогласованность - в детей, "обнуляем" в родителе
+        shift[vertex * 2] = shift[vertex];
+        shift[vertex * 2 + 1] = shift[vertex];
+        shift[vertex] = NO_OPERATION;
+
+        // пересчитываем в детях значения tree
+        long long tm = (tl + tr) / 2;
+        tree[vertex * 2] = min(tree[vertex * 2], shift[vertex * 2]);
+        tree[vertex * 2 + 1] = min(tree[vertex * 2 + 1], shift[vertex * 2 + 1]);
+    }
+}
+
+
+long long get_min(long long l, long long r, long long vertex, long long tl, long long tr) {
+    /* получаем минимум на отрезке */
+
+    // поддерево внутри интервала
+    if (l <= tl && tr <= r) {
+        return tree[vertex];
+    }
+
+    // поддерево вне интервала
+    if (tr < l || r < tl) {
+        return NO_OPERATION;
+    }
+
+    // поддерево пересекается с интервалом частично
+    push(vertex, tl, tr);  // перед каждым шагом вниз проталкиваем несогласованности вниз
+    long long tm = (tl + tr) / 2;
+    return min(get_min(l, r, vertex * 2, tl, tm), get_min(l, r, vertex * 2 + 1, tm + 1, tr));
+}
+
+
+void ass(long long l, long long r, long long val, long long vertex, long long tl, long long tr) {
+    /* update на отрезке */
+
+    // поддерево внутри интервала присвоения значения. Изменяем значение и запоминаем несогласованность
+    if (l <= tl && tr <= r) {
+        shift[vertex] = val;
+        tree[vertex] = val;
+        return;
+    }
+
+    // поддерево вне интервала. Ничего не делаем
+    if (tr < l || r < tl) {
+        return;
+    }
+
+    // поддерево пересекается с интервалом частично.
+    // перед каждым шагом вниз проталкиваем несогласованности вниз
+    push(vertex, tl, tr);
+    // шагаем в левого сына, потом в правого
+    long long tm = (tl + tr) / 2;
+    ass(l, r, val, vertex * 2,     tl,     tm);
+    ass(l, r, val, vertex * 2 + 1, tm + 1, tr);
+    // считаем значение в вершине после того, как сыновей отработали
+    tree[vertex] = min(tree[vertex * 2], tree[vertex * 2 + 1]);
+}
+
+
+void print(vector <long long> & vec) {
+    /* печать массивов для дебага */
+
+    for (auto i: vec) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+}
+
+
+int main() {
+    // #define int long long
+    long long n, a, b, c, m;
+    string str;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> input[i];
+    }
+    build_tree(1, 0, n - 1);
+    // print(tree);
+    // print(shift);
+    // cout << '\n';
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        cin >> str >> a >> b;
+        if (str == "set") {
+            cin >> c;
+            ass(a - 1, b - 1, c, 1, 0, n - 1);
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        } else {
+            cout << get_min(a - 1, b - 1, 1, 0, n - 1) << '\n';
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        }
+    }
+}
+
+
+-- Дерево отрезков с массовыми операциями вариант 3
+-- добавление числа на отрезке и сумма на отрезке
+// перед каждым шагом вниз проталкиваем несогласованности вниз
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+const long long N = 10 + 7;
+const long long NO_OPERATION = 0;
+vector <long long> input(    N, NO_OPERATION);  // вектор исходных данных
+vector <long long>  tree(4 * N, NO_OPERATION);  // дерево отрезков
+vector <long long> shift(4 * N, NO_OPERATION);  // вектор несогласованных модификаций
+
+
+void build_tree(long long vertex, long long tl, long long tr) {
+    /* строим изначальное дерево */
+
+    if (tl == tr) {
+        // листья
+        tree[vertex] = input[tl];
+    } else {
+        long long tm = (tl + tr) / 2;
+        build_tree(vertex * 2,         tl, tm);
+        build_tree(vertex * 2 + 1, tm + 1, tr);
+        tree[vertex] = tree[vertex * 2]
+                     + tree[vertex * 2 + 1];
+    }
+}
+
+
+void push(long long vertex, long long tl, long long tr) {
+    /* проталкиваем несогласованные модификации вниз */
+
+    if (shift[vertex] == NO_OPERATION) return;
+
+    if (tr - tl != 0) {
+        // вниз проталкиваем несогласованность - в детей, обнуляем в родителе
+        shift[vertex * 2]     += shift[vertex];
+        shift[vertex * 2 + 1] += shift[vertex];
+        shift[vertex] = NO_OPERATION;
+
+        // пересчитываем в детях значения tree
+        long long tm = (tl + tr) / 2;
+        tree[vertex * 2]     += (tm - tl + 1) * shift[vertex * 2];
+        tree[vertex * 2 + 1] += (tr - tm)     * shift[vertex * 2 + 1];
+
+        return;
+    }
+
+    // tree[vertex] += shift[vertex];
+    // return;
+}
+
+
+long long get_sum(long long l, long long r, long long vertex, long long tl, long long tr) {
+    /* получаем сумму на отрезке */
+
+    // поддерево внутри интервала модификации
+    if (l <= tl && tr <= r) {
+        return tree[vertex];
+    }
+
+    // поддерево вне интервала
+    if (tr < l || r < tl) {
+        return 0;
+    }
+
+    // поддерево пересекается с интервалом частично
+    push(vertex, tl, tr);    // перед каждым шагом вниз проталкиваем несогласованности вниз
+    long long tm = (tl + tr) / 2;
+    return get_sum(l, r, vertex * 2,         tl, tm)
+         + get_sum(l, r, vertex * 2 + 1, tm + 1, tr);
+}
+
+
+void add(long long l, long long r, long long val, long long vertex, long long tl, long long tr) {
+    /* update на отрезке */
+
+    // поддерево внутри интервала модификации. Изменяем сумму в tree и запоминаем несогласованность
+    if (l <= tl && tr <= r) {
+        tree[vertex]  += val * (tr - tl + 1);
+        shift[vertex] += val;
+        return;
+    }
+
+    // поддерево вне интервала. Ничего не делаем
+    if (tr < l || r < tl) {
+        return;
+    }
+
+    // поддерево пересекается с интервалом частично.
+    // перед каждым шагом вниз проталкиваем несогласованности вниз
+    push(vertex, tl, tr);
+    // шагаем в левого сына, потом в правого
+    long long tm = (tl + tr) / 2;
+    add(l, r, val, vertex * 2,         tl, tm);
+    add(l, r, val, vertex * 2 + 1, tm + 1, tr);
+    // считаем значение в вершине после того, как сыновей отработали
+    tree[vertex] = tree[vertex * 2]
+                 + tree[vertex * 2 + 1];
+}
+
+
+void print(vector <long long> & vec) {
+    /* печать массивов для дебага */
+
+    for (auto i: vec) {
+        cout << i << ' ';
+    }
+    cout << '\n';
+}
+
+
+int main() {
+    // #define int long long
+    long long n, a, b, c, m;
+    string str;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> input[i];
+    }
+    build_tree(1, 0, n - 1);
+    // print(tree);
+    // print(shift);
+    // cout << '\n';
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        cin >> str >> a >> b;
+        if (str == "add") {
+            cin >> c;
+            add(a - 1, b - 1, c, 1, 0, n - 1);
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        } else {
+            cout << get_sum(a - 1, b - 1, 1, 0, n - 1) << '\n';
+            // print(tree);
+            // print(shift);
+            // cout << '\n';
+        }
+    }
+}
+
+/*
+10
+1 4 -6 5 2 -6 5 7 -1 1
+11
+add 1 4 -2
+add 2 4 -4
+sum 4 10
+sum 7 9
+add 6 10 -2
+sum 1 6
+add 1 9 -6
+add 7 8 0
+add 4 4 6
+add 1 3 5
+sum 1 10
+
+10
+1 4 -6 5 2 -6 5 7 -1 1
+15
+add 1 4 -2
+add 2 4 -4
+sum 4 10
+sum 7 9
+add 6 10 -2
+sum 1 6
+sum 1 10
+add 1 9 -6
+sum 1 10
+add 7 8 0
+sum 1 10
+add 4 4 6
+sum 1 10
+add 1 3 5
+sum 1 10
+
+*/
 
