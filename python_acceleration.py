@@ -1,7 +1,10 @@
+import sys
 
+_ = int(input())
+lst = list(map(int, sys.stdin.readlines()))
+# прекращение ввода в пайчарме - Ctrl + D
 
-
-
+print(sum(lst))
 
 '''
 -----------------
