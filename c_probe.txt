@@ -1653,4 +1653,134 @@ sum 1 10
 */
 
 
+--LCA
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
+long long t = 0, Logn = 1;
+
+// создание вектора предподсчета родителей 2^i и векторов tin и tout
+void DFS(long long v,
+            std::vector<std::vector<long long>>& up,
+            std::vector<long long>& tin,
+            std::vector<long long>& tout,
+            std::vector<std::vector<long long>>& V,
+            std::vector<long long>& Rod) {
+    for (int i = 1; i < Logn; i++)
+        up[v][i] = up[up[v][i - 1]][i - 1];
+    tin[v] = t++;
+    for (int u : V[v]) {
+        up[u][0] = v;
+        // if (u != Rod[v]) {}
+        DFS(u, up, tin, tout, V, Rod);
+    }
+    tout[v] = t++;
+}
+
+// является ли одна вершина предком другой
+bool ancestor(long long u,
+                long long v,
+                std::vector<long long>& tin,
+                std::vector<long long>& tout) {
+    return tin[u] <= tin[v] && tout[v] <= tout[u];
+}
+
+// нахождение ближайшего общего предка
+int lca(long long v,
+        long long u,
+        std::vector<long long>& tin,
+        std::vector<long long>& tout,
+        std::vector<std::vector<long long>>& up) {
+    if (ancestor(v, u, tin, tout)) {
+        return v;
+    }
+    if (ancestor(u, v, tin, tout)) {
+        return u;
+    }
+    for (int l = Logn-1; l >= 0; l--) {
+        if (!ancestor(up[v][l], u, tin, tout))
+            v = up[v][l];
+    }
+    return up[v][0];
+}
+
+int main() {
+    long long n, m, x, y, z, u, ob;
+    long long Ans = 0;  // сумма всех наших промежуточных ответов
+    std::cin >> n >> m;
+    std::vector<long long> a(2 * m + 1), tin(n), tout(n), Rod(n);
+    while ((1<<Logn) <= n) Logn++;
+    std::vector<std::vector<long long>> V(n), up(n, std::vector<long long>(Logn));
+
+    // нам дается родитель для каждой вершины, делаем список смежности,
+    // но только детей
+    Rod[0] = 0;
+    for (int i = 1; i < n; i++) {
+        std::cin >> Rod[i];
+        // V[i].push_back(Rod[i]);
+        V[Rod[i]].push_back(i);
+    }
+
+    std::cin >> a[1] >> a[2];
+    std::cin >> x >> y >> z;
+
+    // генерация какого-то вектора, на основании которого мы потом будем генерировать запросы
+    for (int i = 3; i <= 2 * m; i++) {
+        a[i] = (x * a[i - 2] + y * a[i - 1] + z) % n;
+        // std::cout << i << ' ' << a[i] << '\n';
+    }
+
+    DFS(0, up, tin, tout, V, Rod);
+    for (auto i: up) {
+        for (auto j: i) {
+            std::cout << j << ' ';
+        }
+        std::cout << '\n';
+    }
+    ob = lca(a[1], a[2], tin, tout, up);
+    Ans += ob;
+    // std::cout << ob << '\n';
+    for (int i = 2; i <= m; i++) {
+        // следующую пару вершин для запроса генерируем во по такой формуле
+        std::cout << "i-" << i << " v-" << (a[i * 2 - 1] + ob) % n << " u-" << a[i * 2];
+        ob = lca((a[i * 2 - 1] + ob) % n, a[i * 2], tin, tout, up);
+        Ans += ob;
+        std::cout << " ob-" << ob << " Ans-" << Ans << '\n';
+        // std::cout << ob << '\n';
+    }
+    std::cout << Ans;
+    return 0;
+}
+
+/*
+3 2
+0 1
+2 1
+1 1 0
+ответ 2
+
+1 2
+
+0 0
+1 1 1
+ответ 0
+
+3 1
+0 1
+2 1
+1 1 0
+ответ 1
+
+10 10
+6 7 7 8 8 9 9 0 0
+4 6
+876543 987654 654321
+
+
+13 10
+6 7 7 8 8 9 9 0 0 1 10 11
+12 9
+942381 989859 579345
+
+*/
